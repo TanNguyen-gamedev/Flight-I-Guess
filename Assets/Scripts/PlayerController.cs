@@ -30,14 +30,12 @@ public class PlayerController : MonoBehaviour
         _inputSystem.Enable();
         _inputSystem.Player.Move.performed += OnMovePerform;
         _inputSystem.Player.Move.canceled += OnMoveCancel;
-        _inputSystem.Player.Attack.performed += OnAttack;
     }
 
     private void OnDisable()
     {
         _inputSystem.Player.Move.performed -= OnMovePerform;
         _inputSystem.Player.Move.canceled -= OnMoveCancel;
-        _inputSystem.Player.Attack.performed -= OnAttack;
         _inputSystem.Disable();
     }
 
@@ -50,16 +48,7 @@ public class PlayerController : MonoBehaviour
     private void OnMoveCancel(InputAction.CallbackContext callback)
     {
         _moveInput = callback.ReadValue<Vector2>();
-    }
-
-    private void OnAttack(InputAction.CallbackContext callback)
-    {
-        GameObject projectile = Instantiate(_bulletPrefab,
-            _firePoint.position,
-            _firePoint.rotation
-        );
-        Vector3 direction = _firePoint.up;
-        projectile.GetComponent<ProjectileMisslile>().SetDirection(direction);
+        _boosterFlame.SetActive(false); // Fix: also turn off the booster flame!
     }
 
     private void FixedUpdate()
