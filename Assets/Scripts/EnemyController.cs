@@ -13,7 +13,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float _attackTimer = 1f;
     [SerializeField] private float _basePoint = 10f;
     [SerializeField] private FloatEventChannel _onEnemyDeath;
-    [SerializeField] private GameObject _impactParticle;
     private float _enemyPoint;
 
     private bool _canAttack = true;
@@ -38,20 +37,17 @@ public class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Vector2 contactPoint = collision.GetContact(0).point;
-
-        GameObject impactEffect = Instantiate(
-            _impactParticle,
-            contactPoint,
-            Quaternion.identity
-        );
-        impactEffect.transform.localScale *= Mathf.Clamp(_rb.linearVelocity.magnitude,0,2f);
-        Destroy(impactEffect, 1f);
-
-
         if(collision.gameObject.CompareTag("Projectile"))
         {
-            Destroy(collision.gameObject);
+            _onEnemyDeath.RaiseEvent(_enemyPoint);
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(collider.gameObject.CompareTag("Projectile"))
+        {
             _onEnemyDeath.RaiseEvent(_enemyPoint);
             Destroy(gameObject);
         }

@@ -18,6 +18,7 @@ namespace FlightIGuess.Weapons.Unity
     public class ProjectilePoolManager : MonoBehaviour, IProjectileSpawner
     {
         [SerializeField] private ProjectilePoolConfig[] _poolConfigs;
+        [SerializeField] private EffectPoolManager _effectPoolManager;
 
         private Dictionary<string, IObjectPool<PooledProjectile>> _pools;
 
@@ -57,6 +58,12 @@ namespace FlightIGuess.Weapons.Unity
                 
                 // Inject the pool reference immediately upon getting it
                 projectile.SetPool(pool);
+                
+                // Inject the effect spawner so the projectile can spawn explosions
+                if (_effectPoolManager != null)
+                {
+                    projectile.SetEffectSpawner(_effectPoolManager);
+                }
                 
                 projectile.transform.position = new Vector3(position.X, position.Y, 0f);
                 

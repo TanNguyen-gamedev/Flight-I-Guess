@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 7691069178875128279}
   - component: {fileID: 7949208997768636297}
   - component: {fileID: 3036011810093307013}
-  - component: {fileID: -8582945450308498450}
   - component: {fileID: 5944026434187666539}
+  - component: {fileID: -4023159314236837746}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Missle
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,25 +116,11 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &-8582945450308498450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208775899768075721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c65e5b852ece42641956197a8f1404d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  _speed: 50
-  _lifeTime: 1
 --- !u!61 &5944026434187666539
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,7 +137,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -181,3 +167,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.08, y: 0.26}
   m_EdgeRadius: 0
+--- !u!114 &-4023159314236837746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208775899768075721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40681c50be21a224db06e8fd5719d4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlightIGuess.Weapons.Unity.PooledProjectile
+  _speed: 10
+  _lifeTime: 2

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451304d18bf3ecc41a0401c9f7d58029, type: 3}
+  m_Name: Shotgun
+  m_EditorClassIdentifier: Assembly-CSharp::FlightIGuess.Weapons.Unity.WeaponConfigSO
+  WeaponId: Shotgun
+  ProjectileId: Sharp
+  EffectId: MuzzleFlash
+  TriggerType: 0
+  FireRatePerSecond: 0.01
+  ChargeTimeSeconds: 1
+  EmitterType: 1
+  ProjectileCount: 10
+  SpreadAngleDegrees: 90
+  TurnRateDegreesPerSecond: 90

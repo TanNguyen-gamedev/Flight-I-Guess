@@ -13,12 +13,15 @@ namespace FlightIGuess.Weapons.Unity
     {
         [SerializeField] private HardpointAuthoring[] _hardpointAuthorings;
         [SerializeField] private ProjectilePoolManager _poolManager;
+        [SerializeField] private EffectPoolManager _effectPoolManager;
         
         // In a real game, this would be injected or read from an InputManager.
         // For now, we read directly from the new Input System asset.
         private InputSystem_Actions _inputSystem;
         
         private List<HardpointModel> _hardpointModels;
+        private Vector2 _aimDirection;
+        private Vector2 _mousePosition;
 
         private void Awake()
         {
@@ -28,18 +31,16 @@ namespace FlightIGuess.Weapons.Unity
             // Initialize models
             foreach (var authoring in _hardpointAuthorings)
             {
-                var hardpointModel = new HardpointModel(authoring.HardpointId);
+                var hardpointModel = new HardpointModel(authoring.HardpointId, authoring.InitialAngle);
                 
-                // --- MOCK WEAPON SETUP ---
-                // Normally, a LoadoutManager would equip these from SaveData or ScriptableObjects.
-                // We inject a basic weapon directly here to prove the architecture.
-                var trigger = new AutoFireTrigger(fireRatePerSecond: 5f); // 5 shots per second
-                var emitter = new SingleShotEmitter();
-                var weapon = new WeaponModel(trigger, emitter, "BasicLaser");
+                // If the authoring component has an initial weapon configured, equip it.
+                if (authoring.InitialWeapon != null)
+                {
+                    var weapon = authoring.InitialWeapon.CreateWeaponModel();
+                    hardpointModel.Equip(weapon);
+                    hardpointModel.TurnRateDegreesPerSecond = authoring.InitialWeapon.TurnRateDegreesPerSecond;
+                }
                 
-                hardpointModel.Equip(weapon);
-                // -------------------------
-
                 _hardpointModels.Add(hardpointModel);
             }
         }
@@ -47,10 +48,12 @@ namespace FlightIGuess.Weapons.Unity
         private void OnEnable()
         {
             _inputSystem.Enable();
+            _inputSystem.Player.MousePosition.performed += OnMouseMove;
         }
 
         private void OnDisable()
         {
+            _inputSystem.Player.MousePosition.canceled -= OnMouseMove;
             _inputSystem.Disable();
         }
 
@@ -66,11 +69,27 @@ namespace FlightIGuess.Weapons.Unity
                 var model = _hardpointModels[i];
                 var authoring = _hardpointAuthorings[i];
 
-                var pos = new SysNum.Vector2(authoring.Position.x, authoring.Position.y);
-                var dir = new SysNum.Vector2(authoring.Direction.x, authoring.Direction.y);
+                Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(_mousePosition);
+                mouseWorldPos.z = 0f;
+                Vector2 aimDirection = mouseWorldPos - authoring.transform.position;
+                
+                // 1. Pass the target direction to the Pure C# model so it can do the rotation math
+                var targetDir = new SysNum.Vector2(aimDirection.x, aimDirection.y);
+                model.AimTowards(targetDir, dt);
 
-                model.Tick(dt, isFiring, _poolManager, pos, dir);
+                // 2. Read the calculated angle back and apply it to the Unity Transform
+                authoring.transform.rotation = Quaternion.Euler(0, 0, model.CurrentAngleDegrees);
+
+                var pos = new SysNum.Vector2(authoring.Position.x, authoring.Position.y);
+
+                model.Tick(dt, isFiring, _poolManager, _effectPoolManager, pos);
             }
         }
+
+        private void OnMouseMove(InputAction.CallbackContext callback)
+        {
+            _mousePosition = callback.ReadValue<Vector2>();
+        }
+
     }
 }

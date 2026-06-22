@@ -10,6 +10,6 @@ namespace FlightIGuess.Weapons.Core
         /// <summary>
         /// Emits the projectiles using the provided spawner.
         /// </summary>
-        void Emit(IProjectileSpawner spawner, string projectileId, Vector2 origin, Vector2 baseDirection);
+        void Emit(IProjectileSpawner projectileSpawner, IEffectSpawner effectSpawner, string projectileId, string effectId, Vector2 origin, Vector2 baseDirection);
     }
 }

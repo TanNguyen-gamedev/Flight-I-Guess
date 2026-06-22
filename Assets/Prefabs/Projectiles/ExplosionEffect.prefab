@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5098795137009715588}
   - component: {fileID: 6622489209436950503}
   - component: {fileID: 5945505529039683922}
+  - component: {fileID: -2186718744611123598}
   m_Layer: 0
   m_Name: ExplosionEffect
   m_TagString: Untagged
@@ -4992,3 +4993,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-2186718744611123598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2594488630366168336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c781b87865e47c746ac7553da44e2811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlightIGuess.Weapons.Unity.PooledEffect
+  _lifeTime: 1

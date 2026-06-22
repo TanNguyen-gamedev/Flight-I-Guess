@@ -17,11 +17,16 @@ namespace FlightIGuess.Weapons.Core
             _spreadAngleDegrees = spreadAngleDegrees;
         }
 
-        public void Emit(IProjectileSpawner spawner, string projectileId, Vector2 origin, Vector2 baseDirection)
+        public void Emit(IProjectileSpawner projectileSpawner, IEffectSpawner effectSpawner, string projectileId, string effectId, Vector2 origin, Vector2 baseDirection)
         {
+            if (!string.IsNullOrEmpty(effectId))
+            {
+                effectSpawner?.Spawn(effectId, origin, baseDirection);
+            }
+
             if (_projectileCount == 1)
             {
-                spawner.Spawn(projectileId, origin, baseDirection);
+                projectileSpawner.Spawn(projectileId, origin, baseDirection);
                 return;
             }
 
@@ -41,7 +46,7 @@ namespace FlightIGuess.Weapons.Core
                     (float)Math.Sin(currentAngle)
                 );
 
-                spawner.Spawn(projectileId, origin, spreadDirection);
+                projectileSpawner.Spawn(projectileId, origin, spreadDirection);
             }
         }
     }

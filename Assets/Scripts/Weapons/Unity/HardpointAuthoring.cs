@@ -9,10 +9,12 @@ namespace FlightIGuess.Weapons.Unity
     public class HardpointAuthoring : MonoBehaviour
     {
         [SerializeField] private string _hardpointId;
+        [SerializeField] private WeaponConfigSO _initialWeapon;
+        
         public string HardpointId => _hardpointId;
+        public WeaponConfigSO InitialWeapon => _initialWeapon;
 
-        // In 2D, transform.up is typically the forward firing direction.
         public Vector2 Position => transform.position;
-        public Vector2 Direction => transform.up; 
+        public float InitialAngle => transform.rotation.eulerAngles.z;
     }
 }
