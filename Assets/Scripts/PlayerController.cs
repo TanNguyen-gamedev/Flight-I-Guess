@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using PrimeTween;
 
 public class PlayerController : MonoBehaviour
 {

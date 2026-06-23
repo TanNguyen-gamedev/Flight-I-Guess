@@ -1,4 +1,5 @@
 using UnityEngine;
+using PrimeTween;
 using FlightIGuess.Weapons.Core;
 
 namespace FlightIGuess.Weapons.Unity
@@ -49,6 +50,11 @@ namespace FlightIGuess.Weapons.Unity
         
         [Tooltip("Only used if EmitterType is Spread")]
         public float SpreadAngleDegrees = 30f;
+
+        [Header("Recoil Visuals")]
+        public float RecoilDistance = 0.2f;
+        public TweenSettings RecoilOutSettings = new TweenSettings(0.05f, Ease.OutQuad);
+        public TweenSettings RecoilReturnSettings = new TweenSettings(0.1f, Ease.InOutQuad);
 
         [Header("Turret Settings")]
         [Tooltip("How fast the hardpoint can rotate when this weapon is equipped (degrees per second)")]

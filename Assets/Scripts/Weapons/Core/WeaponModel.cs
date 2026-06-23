@@ -8,6 +8,8 @@ namespace FlightIGuess.Weapons.Core
     /// </summary>
     public class WeaponModel
     {
+        public event System.Action OnFired;
+
         private readonly IWeaponTrigger _trigger;
         private readonly IWeaponEmitter _emitter;
         private readonly string _projectileId;
@@ -26,6 +28,7 @@ namespace FlightIGuess.Weapons.Core
             if (_trigger.Evaluate(deltaTime, isInputHeld))
             {
                 _emitter.Emit(projectileSpawner, effectSpawner, _projectileId, _effectId, hardpointPosition, hardpointDirection);
+                OnFired?.Invoke();
             }
         }
     }

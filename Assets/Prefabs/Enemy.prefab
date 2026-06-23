@@ -80,8 +80,8 @@ MonoBehaviour:
   _enemySprite: {fileID: 1253411121577317884}
   _attackTimer: 1
   _basePoint: 10
-  _onEnemyDeath: {fileID: 11400000, guid: e79aacb0d84f9dc47b96c9a23a8ad7cd, type: 2}
-  _impactParticle: {fileID: 2594488630366168336, guid: d739f6dd2d62ab24c92db1006d6c5f5a, type: 3}
+  _onEnemyDeathFloat: {fileID: 11400000, guid: e79aacb0d84f9dc47b96c9a23a8ad7cd, type: 2}
+  _onEnemyDeath: {fileID: 11400000, guid: 2e43efa5ae8e2084eb302f914b374ee2, type: 2}
 --- !u!1 &6893376742449285793
 GameObject:
   m_ObjectHideFlags: 0

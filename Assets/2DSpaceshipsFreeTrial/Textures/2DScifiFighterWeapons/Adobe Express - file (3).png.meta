@@ -1,0 +1,1456 @@
+fileFormatVersion: 2
+guid: 22d673907c79b384c93205c9eac4f7fb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -394276232368140000
+    second: Adobe Express - file (3)_0
+  - first:
+      213: -1931922936826347346
+    second: Adobe Express - file (3)_1
+  - first:
+      213: -918078492480431994
+    second: Adobe Express - file (3)_2
+  - first:
+      213: -3980015590185537574
+    second: Adobe Express - file (3)_3
+  - first:
+      213: 3024266229223650667
+    second: Adobe Express - file (3)_4
+  - first:
+      213: -4518244748081890447
+    second: Adobe Express - file (3)_5
+  - first:
+      213: 4614667797529941854
+    second: Adobe Express - file (3)_6
+  - first:
+      213: -3797687858912548716
+    second: Adobe Express - file (3)_7
+  - first:
+      213: 5112730083092227383
+    second: Adobe Express - file (3)_8
+  - first:
+      213: -437171162559660938
+    second: Adobe Express - file (3)_9
+  - first:
+      213: 1417058396853106504
+    second: Adobe Express - file (3)_10
+  - first:
+      213: 3889794438942666251
+    second: Adobe Express - file (3)_11
+  - first:
+      213: -3335373589974405766
+    second: Adobe Express - file (3)_12
+  - first:
+      213: -4944344774710630882
+    second: Adobe Express - file (3)_13
+  - first:
+      213: -1694163827421947401
+    second: Adobe Express - file (3)_14
+  - first:
+      213: -2405522327356348699
+    second: Adobe Express - file (3)_15
+  - first:
+      213: -9129292773007929221
+    second: Adobe Express - file (3)_16
+  - first:
+      213: -5584735035080837322
+    second: Adobe Express - file (3)_17
+  - first:
+      213: 4570104268110585421
+    second: Adobe Express - file (3)_18
+  - first:
+      213: -8255763378454991126
+    second: Adobe Express - file (3)_19
+  - first:
+      213: 5197227270254482925
+    second: Adobe Express - file (3)_20
+  - first:
+      213: -5183397765522952187
+    second: Adobe Express - file (3)_21
+  - first:
+      213: 1810989326283101253
+    second: Adobe Express - file (3)_22
+  - first:
+      213: 3582707119968136197
+    second: Adobe Express - file (3)_23
+  - first:
+      213: 7290419667086787653
+    second: Adobe Express - file (3)_24
+  - first:
+      213: 4113196122160538967
+    second: Adobe Express - file (3)_25
+  - first:
+      213: -90940465634651030
+    second: Adobe Express - file (3)_26
+  - first:
+      213: 4183362834927358984
+    second: Adobe Express - file (3)_27
+  - first:
+      213: -5880887316559030784
+    second: Adobe Express - file (3)_28
+  - first:
+      213: 8942924851699061314
+    second: Adobe Express - file (3)_29
+  - first:
+      213: -8796786407599794328
+    second: Adobe Express - file (3)_30
+  - first:
+      213: 4370979949111484522
+    second: Adobe Express - file (3)_31
+  - first:
+      213: -919231748654867511
+    second: Adobe Express - file (3)_32
+  - first:
+      213: 419742681467851259
+    second: Adobe Express - file (3)_33
+  - first:
+      213: -5373736683767696666
+    second: Adobe Express - file (3)_34
+  - first:
+      213: 2109857679912570886
+    second: Adobe Express - file (3)_35
+  - first:
+      213: -8557433456413741332
+    second: Adobe Express - file (3)_36
+  - first:
+      213: 1136549589775726274
+    second: Adobe Express - file (3)_37
+  - first:
+      213: -3198599173457995126
+    second: Adobe Express - file (3)_38
+  - first:
+      213: 6545106583608115177
+    second: Adobe Express - file (3)_39
+  - first:
+      213: -5463399613663351070
+    second: Adobe Express - file (3)_40
+  - first:
+      213: -1133955017543069567
+    second: Adobe Express - file (3)_41
+  - first:
+      213: -2959154654638887261
+    second: Adobe Express - file (3)_42
+  - first:
+      213: 1454321783629213342
+    second: Adobe Express - file (3)_43
+  - first:
+      213: -7546452387536576989
+    second: Adobe Express - file (3)_44
+  - first:
+      213: 2465398228133628859
+    second: Adobe Express - file (3)_45
+  - first:
+      213: -4218910371664377466
+    second: Adobe Express - file (3)_46
+  - first:
+      213: -959157326711087334
+    second: Adobe Express - file (3)_47
+  - first:
+      213: 1653970705993012134
+    second: Adobe Express - file (3)_48
+  - first:
+      213: 3834610720325172686
+    second: Adobe Express - file (3)_49
+  - first:
+      213: 3556059046361198979
+    second: Adobe Express - file (3)_50
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_0
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 1381
+        width: 112
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 021515a0bdf378af0800000000000000
+      internalID: -394276232368140000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_1
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 1381
+        width: 114
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea04901235e6035e0800000000000000
+      internalID: -1931922936826347346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_2
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 1381
+        width: 116
+        height: 331
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68817cba9745243f0800000000000000
+      internalID: -918078492480431994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_3
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 1381
+        width: 116
+        height: 466
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adf697268e424c8c0800000000000000
+      internalID: -3980015590185537574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_4
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 824
+        width: 134
+        height: 562
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b65f51bbc1a58f920800000000000000
+      internalID: 3024266229223650667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_5
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 1304
+        width: 148
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17bfd4e1758fb41c0800000000000000
+      internalID: -4518244748081890447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_6
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 1304
+        width: 157
+        height: 454
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e57d43c89e79a0040800000000000000
+      internalID: 4614667797529941854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_7
+      rect:
+        serializedVersion: 2
+        x: 1222
+        y: 1304
+        width: 171
+        height: 454
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49824b96307eb4bc0800000000000000
+      internalID: -3797687858912548716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_8
+      rect:
+        serializedVersion: 2
+        x: 1426
+        y: 1347
+        width: 134
+        height: 329
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7356a231ce014f640800000000000000
+      internalID: 5112730083092227383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_9
+      rect:
+        serializedVersion: 2
+        x: 1582
+        y: 1347
+        width: 136
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67c3695d42bdee9f0800000000000000
+      internalID: -437171162559660938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_10
+      rect:
+        serializedVersion: 2
+        x: 1737
+        y: 1347
+        width: 136
+        height: 448
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 847f962aa176aa310800000000000000
+      internalID: 1417058396853106504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_11
+      rect:
+        serializedVersion: 2
+        x: 1890
+        y: 1347
+        width: 139
+        height: 583
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0ea776ee635bf530800000000000000
+      internalID: 3889794438942666251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_12
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 824
+        width: 133
+        height: 402
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7d2b58346f56b1d0800000000000000
+      internalID: -3335373589974405766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_13
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 824
+        width: 135
+        height: 388
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e166058af98226bb0800000000000000
+      internalID: -4944344774710630882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_14
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 824
+        width: 134
+        height: 402
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f9d23b99fe1d78e0800000000000000
+      internalID: -1694163827421947401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_15
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 24
+        width: 98
+        height: 808
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e667a2303edd9ed0800000000000000
+      internalID: -2405522327356348699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_16
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 738
+        width: 148
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b70525e879c3e4180800000000000000
+      internalID: -9129292773007929221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_17
+      rect:
+        serializedVersion: 2
+        x: 1038
+        y: 732
+        width: 184
+        height: 551
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 637f35523190f72b0800000000000000
+      internalID: -5584735035080837322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_18
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 739
+        width: 202
+        height: 544
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4e5a3f4e954c6f30800000000000000
+      internalID: 4570104268110585421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_19
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 783
+        width: 158
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeee28db2f2ad6d80800000000000000
+      internalID: -8255763378454991126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_20
+      rect:
+        serializedVersion: 2
+        x: 1689
+        y: 783
+        width: 159
+        height: 538
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de5dd7c8aa2402840800000000000000
+      internalID: 5197227270254482925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_21
+      rect:
+        serializedVersion: 2
+        x: 1876
+        y: 783
+        width: 148
+        height: 508
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5007370f13fd018b0800000000000000
+      internalID: -5183397765522952187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_22
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 552
+        width: 559
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 544d02d723de12910800000000000000
+      internalID: 1810989326283101253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_23
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 26
+        width: 70
+        height: 774
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50ca6f3c42558b130800000000000000
+      internalID: 3582707119968136197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_24
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 522
+        width: 104
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 544ca389f06cc2560800000000000000
+      internalID: 7290419667086787653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_25
+      rect:
+        serializedVersion: 2
+        x: 987
+        y: 522
+        width: 114
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 755a4e89412051930800000000000000
+      internalID: 4113196122160538967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_26
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 511
+        width: 123
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a64532ad02aecbef0800000000000000
+      internalID: -90940465634651030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_27
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 506
+        width: 134
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8049a6e755a4e0a30800000000000000
+      internalID: 4183362834927358984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_28
+      rect:
+        serializedVersion: 2
+        x: 1446
+        y: 570
+        width: 137
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0061664d424e26ea0800000000000000
+      internalID: -5880887316559030784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_29
+      rect:
+        serializedVersion: 2
+        x: 1609
+        y: 552
+        width: 116
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 242198e55c6ab1c70800000000000000
+      internalID: 8942924851699061314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_30
+      rect:
+        serializedVersion: 2
+        x: 1753
+        y: 570
+        width: 124
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8679702ae598be580800000000000000
+      internalID: -8796786407599794328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_31
+      rect:
+        serializedVersion: 2
+        x: 1913
+        y: 575
+        width: 88
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a602523fa17d8ac30800000000000000
+      internalID: 4370979949111484522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_32
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 28
+        width: 43
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cb5a2b489b3e33f0800000000000000
+      internalID: -919231748654867511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_33
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 26
+        width: 54
+        height: 489
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf116f1beb933d500800000000000000
+      internalID: 419742681467851259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_34
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 24
+        width: 52
+        height: 381
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e27a8715f6ac65b0800000000000000
+      internalID: -5373736683767696666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_35
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 24
+        width: 55
+        height: 380
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60091d1a168b74d10800000000000000
+      internalID: 2109857679912570886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_36
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 348
+        width: 271
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cee6a615c93ed3980800000000000000
+      internalID: -8557433456413741332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_37
+      rect:
+        serializedVersion: 2
+        x: 1245
+        y: 175
+        width: 166
+        height: 292
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c6b23884d5d5cf00800000000000000
+      internalID: 1136549589775726274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_38
+      rect:
+        serializedVersion: 2
+        x: 1433
+        y: 172
+        width: 147
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8a9d27affa4c93d0800000000000000
+      internalID: -3198599173457995126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_39
+      rect:
+        serializedVersion: 2
+        x: 1590
+        y: 172
+        width: 174
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ef3805a2c3e4da50800000000000000
+      internalID: 6545106583608115177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_40
+      rect:
+        serializedVersion: 2
+        x: 1765
+        y: 172
+        width: 122
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2eee6996ffa1e24b0800000000000000
+      internalID: -5463399613663351070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_41
+      rect:
+        serializedVersion: 2
+        x: 1895
+        y: 172
+        width: 122
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 180d2146be16340f0800000000000000
+      internalID: -1133955017543069567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_42
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 26
+        width: 61
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ae2ec61588fee6d0800000000000000
+      internalID: -2959154654638887261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_43
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 26
+        width: 47
+        height: 306
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9ee456f4f9ce2410800000000000000
+      internalID: 1454321783629213342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_44
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 26
+        width: 77
+        height: 306
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32edb7e498d954790800000000000000
+      internalID: -7546452387536576989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_45
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 4
+        width: 43
+        height: 321
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbb48c150aad63220800000000000000
+      internalID: 2465398228133628859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_46
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 12
+        width: 83
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 689cbb5ae5b6375c0800000000000000
+      internalID: -4218910371664377466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_47
+      rect:
+        serializedVersion: 2
+        x: 1458
+        y: 8
+        width: 182
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1f1ca14e7360b2f0800000000000000
+      internalID: -959157326711087334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_48
+      rect:
+        serializedVersion: 2
+        x: 1652
+        y: 12
+        width: 109
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a39d9f089514f610800000000000000
+      internalID: 1653970705993012134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_49
+      rect:
+        serializedVersion: 2
+        x: 1773
+        y: 12
+        width: 109
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecdf2ec2226473530800000000000000
+      internalID: 3834610720325172686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Adobe Express - file (3)_50
+      rect:
+        serializedVersion: 2
+        x: 1901
+        y: 8
+        width: 109
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3817ca2acd8a95130800000000000000
+      internalID: 3556059046361198979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Adobe Express - file (3)_0: -394276232368140000
+      Adobe Express - file (3)_1: -1931922936826347346
+      Adobe Express - file (3)_10: 1417058396853106504
+      Adobe Express - file (3)_11: 3889794438942666251
+      Adobe Express - file (3)_12: -3335373589974405766
+      Adobe Express - file (3)_13: -4944344774710630882
+      Adobe Express - file (3)_14: -1694163827421947401
+      Adobe Express - file (3)_15: -2405522327356348699
+      Adobe Express - file (3)_16: -9129292773007929221
+      Adobe Express - file (3)_17: -5584735035080837322
+      Adobe Express - file (3)_18: 4570104268110585421
+      Adobe Express - file (3)_19: -8255763378454991126
+      Adobe Express - file (3)_2: -918078492480431994
+      Adobe Express - file (3)_20: 5197227270254482925
+      Adobe Express - file (3)_21: -5183397765522952187
+      Adobe Express - file (3)_22: 1810989326283101253
+      Adobe Express - file (3)_23: 3582707119968136197
+      Adobe Express - file (3)_24: 7290419667086787653
+      Adobe Express - file (3)_25: 4113196122160538967
+      Adobe Express - file (3)_26: -90940465634651030
+      Adobe Express - file (3)_27: 4183362834927358984
+      Adobe Express - file (3)_28: -5880887316559030784
+      Adobe Express - file (3)_29: 8942924851699061314
+      Adobe Express - file (3)_3: -3980015590185537574
+      Adobe Express - file (3)_30: -8796786407599794328
+      Adobe Express - file (3)_31: 4370979949111484522
+      Adobe Express - file (3)_32: -919231748654867511
+      Adobe Express - file (3)_33: 419742681467851259
+      Adobe Express - file (3)_34: -5373736683767696666
+      Adobe Express - file (3)_35: 2109857679912570886
+      Adobe Express - file (3)_36: -8557433456413741332
+      Adobe Express - file (3)_37: 1136549589775726274
+      Adobe Express - file (3)_38: -3198599173457995126
+      Adobe Express - file (3)_39: 6545106583608115177
+      Adobe Express - file (3)_4: 3024266229223650667
+      Adobe Express - file (3)_40: -5463399613663351070
+      Adobe Express - file (3)_41: -1133955017543069567
+      Adobe Express - file (3)_42: -2959154654638887261
+      Adobe Express - file (3)_43: 1454321783629213342
+      Adobe Express - file (3)_44: -7546452387536576989
+      Adobe Express - file (3)_45: 2465398228133628859
+      Adobe Express - file (3)_46: -4218910371664377466
+      Adobe Express - file (3)_47: -959157326711087334
+      Adobe Express - file (3)_48: 1653970705993012134
+      Adobe Express - file (3)_49: 3834610720325172686
+      Adobe Express - file (3)_5: -4518244748081890447
+      Adobe Express - file (3)_50: 3556059046361198979
+      Adobe Express - file (3)_6: 4614667797529941854
+      Adobe Express - file (3)_7: -3797687858912548716
+      Adobe Express - file (3)_8: 5112730083092227383
+      Adobe Express - file (3)_9: -437171162559660938
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

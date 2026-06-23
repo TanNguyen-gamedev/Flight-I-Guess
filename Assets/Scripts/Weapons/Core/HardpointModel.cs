@@ -9,6 +9,8 @@ namespace FlightIGuess.Weapons.Core
     /// </summary>
     public class HardpointModel
     {
+        public event Action OnWeaponFired;
+
         public string HardpointId { get; }
         public WeaponModel EquippedWeapon { get; private set; }
         
@@ -24,7 +26,22 @@ namespace FlightIGuess.Weapons.Core
 
         public void Equip(WeaponModel weapon)
         {
+            if (EquippedWeapon != null)
+            {
+                EquippedWeapon.OnFired -= HandleWeaponFired;
+            }
+
             EquippedWeapon = weapon;
+            
+            if (EquippedWeapon != null)
+            {
+                EquippedWeapon.OnFired += HandleWeaponFired;
+            }
+        }
+
+        private void HandleWeaponFired()
+        {
+            OnWeaponFired?.Invoke();
         }
 
         public void AimTowards(Vector2 targetDirection, float deltaTime)

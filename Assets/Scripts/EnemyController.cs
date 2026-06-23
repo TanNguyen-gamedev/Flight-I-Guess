@@ -12,7 +12,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Transform _enemySprite;
     [SerializeField] private float _attackTimer = 1f;
     [SerializeField] private float _basePoint = 10f;
-    [SerializeField] private FloatEventChannel _onEnemyDeath;
+    [SerializeField] private FloatEventChannel _onEnemyDeathFloat;
+    [SerializeField] private EnemyDeathEventChannel _onEnemyDeath;
     private float _enemyPoint;
 
     private bool _canAttack = true;
@@ -39,7 +40,8 @@ public class EnemyController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Projectile"))
         {
-            _onEnemyDeath.RaiseEvent(_enemyPoint);
+            _onEnemyDeathFloat.RaiseEvent(_enemyPoint);
+            _onEnemyDeath.RaiseEvent(transform.position, Mathf.FloorToInt(_enemyPoint), ResourceType.Scrap);            
             Destroy(gameObject);
         }
     }
@@ -48,7 +50,8 @@ public class EnemyController : MonoBehaviour
     {
         if(collider.gameObject.CompareTag("Projectile"))
         {
-            _onEnemyDeath.RaiseEvent(_enemyPoint);
+            _onEnemyDeathFloat.RaiseEvent(_enemyPoint);
+            _onEnemyDeath.RaiseEvent(transform.position, Mathf.FloorToInt(_enemyPoint), ResourceType.Scrap);            
             Destroy(gameObject);
         }
     }

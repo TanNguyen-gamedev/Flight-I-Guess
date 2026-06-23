@@ -32,6 +32,14 @@ public class HUD : MonoBehaviour
         _onGameOver.OnEventRaise += OnGameOver;
         _restartButton.clicked += ReloadScene;
         _onHighestScore.OnEventRaise += OnHighScore;
+        
+        // Find ScrapPoolManager and subscribe to resource events
+        var scrapManager = FindFirstObjectByType<ScrapPoolManager>();
+        if (scrapManager != null && scrapManager.RunStateModel != null)
+        {
+            scrapManager.RunStateModel.OnTotalScrapChanged += OnScrapChange;
+            scrapManager.RunStateModel.OnTotalCoresChanged += OnCoresChange;
+        }
     }
 
     private void OnDisable()
@@ -40,6 +48,25 @@ public class HUD : MonoBehaviour
         _onGameOver.OnEventRaise -= OnGameOver;
         _restartButton.clicked -= ReloadScene;
         _onHighestScore.OnEventRaise -= OnHighScore;
+        
+        var scrapManager = FindFirstObjectByType<ScrapPoolManager>();
+        if (scrapManager != null && scrapManager.RunStateModel != null)
+        {
+            scrapManager.RunStateModel.OnTotalScrapChanged -= OnScrapChange;
+            scrapManager.RunStateModel.OnTotalCoresChanged -= OnCoresChange;
+        }
+    }
+
+    private void OnScrapChange(int totalScrap)
+    {
+        // Update Scrap UI here - for now we'll just update the score text as a placeholder
+        // until you add a dedicated Scrap label to your UI Document
+        _scoreText.text = "Scrap: " + totalScrap;
+    }
+    
+    private void OnCoresChange(int totalCores)
+    {
+        // Update Cores UI here
     }
 
     private void OnScoreChange(float score)

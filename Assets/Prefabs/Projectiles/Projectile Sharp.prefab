@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40681c50be21a224db06e8fd5719d4a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlightIGuess.Weapons.Unity.PooledProjectile
-  _speed: 20
+  _speed: 50
   _lifeTime: 2
   _hitEffectId: Explosion
-  _trail: {fileID: 0}
+  _trail: {fileID: 1168103161698698458}

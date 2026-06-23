@@ -3,6 +3,7 @@ using UnityEngine;
 using FlightIGuess.Weapons.Core;
 using SysNum = System.Numerics;
 using UnityEngine.InputSystem;
+using PrimeTween;
 
 namespace FlightIGuess.Weapons.Unity
 {
@@ -20,7 +21,6 @@ namespace FlightIGuess.Weapons.Unity
         private InputSystem_Actions _inputSystem;
         
         private List<HardpointModel> _hardpointModels;
-        private Vector2 _aimDirection;
         private Vector2 _mousePosition;
 
         private void Awake()
@@ -39,9 +39,15 @@ namespace FlightIGuess.Weapons.Unity
                     var weapon = authoring.InitialWeapon.CreateWeaponModel();
                     hardpointModel.Equip(weapon);
                     hardpointModel.TurnRateDegreesPerSecond = authoring.InitialWeapon.TurnRateDegreesPerSecond;
+                    
+                    // Pass the config to the authoring component so it knows its visual recoil profile
+                    authoring.SetWeaponConfig(authoring.InitialWeapon);
                 }
                 
                 _hardpointModels.Add(hardpointModel);
+
+                // Subscribe to the model's OnWeaponFired event to play visual recoil
+                hardpointModel.OnWeaponFired += authoring.PlayRecoilTween;
             }
         }
 

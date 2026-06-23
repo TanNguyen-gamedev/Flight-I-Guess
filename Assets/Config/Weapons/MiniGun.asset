@@ -16,9 +16,42 @@ MonoBehaviour:
   ProjectileId: Sharp
   EffectId: MuzzleFlash
   TriggerType: 0
-  FireRatePerSecond: 0.01
+  FireRatePerSecond: 1
   ChargeTimeSeconds: 1
   EmitterType: 0
   ProjectileCount: 3
   SpreadAngleDegrees: 30
+  RecoilDistance: 0.2
+  RecoilOutSettings:
+    duration: 0.05
+    ease: 6
+    customEase:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    cycles: 1
+    cycleMode: 0
+    startDelay: 0
+    endDelay: 0
+    useUnscaledTime: 0
+    _useFixedUpdate: 0
+    _updateType: 0
+  RecoilReturnSettings:
+    duration: 0.1
+    ease: 7
+    customEase:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    cycles: 1
+    cycleMode: 0
+    startDelay: 0
+    endDelay: 0
+    useUnscaledTime: 0
+    _useFixedUpdate: 0
+    _updateType: 0
   TurnRateDegreesPerSecond: 180
