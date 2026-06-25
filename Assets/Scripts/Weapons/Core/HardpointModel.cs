@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Numerics;
 
 namespace FlightIGuess.Weapons.Core
@@ -12,16 +11,22 @@ namespace FlightIGuess.Weapons.Core
         public event Action OnWeaponFired;
 
         public string HardpointId { get; }
+        public HardpointSize SlotSize;
         public WeaponModel EquippedWeapon { get; private set; }
         
         // Turret rotation properties
         public float TurnRateDegreesPerSecond { get; set; } = 360f; // Default turn rate
         public float CurrentAngleDegrees { get; private set; }
 
+        // Firing Arc constraints
+        public float ArcCenterDegrees { get; set; }
+        public float ArcRangeDegrees { get; set; } = 360f; // Default is full 360 rotation
+
         public HardpointModel(string hardpointId, float initialAngleDegrees)
         {
             HardpointId = hardpointId;
             CurrentAngleDegrees = initialAngleDegrees;
+            ArcCenterDegrees = initialAngleDegrees;
         }
 
         public void Equip(WeaponModel weapon)
@@ -44,7 +49,7 @@ namespace FlightIGuess.Weapons.Core
             OnWeaponFired?.Invoke();
         }
 
-        public void AimTowards(Vector2 targetDirection, float deltaTime)
+        public void AimTowards(Vector2 targetDirection, float deltaTime, float shipRotationDegrees)
         {
             if (targetDirection == Vector2.Zero) return;
 
@@ -54,6 +59,27 @@ namespace FlightIGuess.Weapons.Core
             
             // Subtract 90 because 2D top-down sprites face UP (+Y) by default
             targetAngleDegrees -= 90f;
+            targetAngleDegrees = NormalizeAngle(targetAngleDegrees);
+
+            // Calculate the dynamic arc center based on the ship's current rotation
+            float currentArcCenter = NormalizeAngle(ArcCenterDegrees + shipRotationDegrees);
+
+            // Apply Arc Constraints
+            if (ArcRangeDegrees < 360f)
+            {
+                float halfArc = ArcRangeDegrees / 2f;
+                float angleDiffFromCenter = DeltaAngle(currentArcCenter, targetAngleDegrees);
+                
+                // Clamp target angle within the arc
+                if (angleDiffFromCenter > halfArc)
+                {
+                    targetAngleDegrees = currentArcCenter + halfArc;
+                }
+                else if (angleDiffFromCenter < -halfArc)
+                {
+                    targetAngleDegrees = currentArcCenter - halfArc;
+                }
+            }
 
             // Move current angle towards target angle
             float delta = DeltaAngle(CurrentAngleDegrees, targetAngleDegrees);

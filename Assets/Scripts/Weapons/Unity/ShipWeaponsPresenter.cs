@@ -21,17 +21,22 @@ namespace FlightIGuess.Weapons.Unity
         private InputSystem_Actions _inputSystem;
         
         private List<HardpointModel> _hardpointModels;
+        public List<HardpointModel> HardpointModels => _hardpointModels;
         private Vector2 _mousePosition;
+        private bool _isFiring = false;
+        private Dictionary<string, HardpointAuthoring> _visualBinding;
 
         private void Awake()
         {
             _inputSystem = new InputSystem_Actions();
             _hardpointModels = new List<HardpointModel>();
+            _visualBinding = new Dictionary<string, HardpointAuthoring>();
 
             // Initialize models
             foreach (var authoring in _hardpointAuthorings)
             {
                 var hardpointModel = new HardpointModel(authoring.HardpointId, authoring.InitialAngle);
+                hardpointModel.SlotSize = authoring.SlotSize;
                 
                 // If the authoring component has an initial weapon configured, equip it.
                 if (authoring.InitialWeapon != null)
@@ -39,12 +44,14 @@ namespace FlightIGuess.Weapons.Unity
                     var weapon = authoring.InitialWeapon.CreateWeaponModel();
                     hardpointModel.Equip(weapon);
                     hardpointModel.TurnRateDegreesPerSecond = authoring.InitialWeapon.TurnRateDegreesPerSecond;
+                    hardpointModel.ArcRangeDegrees = authoring.InitialWeapon.FiringArcDegrees;
                     
                     // Pass the config to the authoring component so it knows its visual recoil profile
                     authoring.SetWeaponConfig(authoring.InitialWeapon);
                 }
                 
                 _hardpointModels.Add(hardpointModel);
+                _visualBinding.Add(authoring.HardpointId, authoring);
 
                 // Subscribe to the model's OnWeaponFired event to play visual recoil
                 hardpointModel.OnWeaponFired += authoring.PlayRecoilTween;
@@ -54,12 +61,16 @@ namespace FlightIGuess.Weapons.Unity
         private void OnEnable()
         {
             _inputSystem.Enable();
+            _inputSystem.Player.Attack.performed += OnAttack;
+            _inputSystem.Player.Attack.canceled += OnAttack;
             _inputSystem.Player.MousePosition.performed += OnMouseMove;
         }
 
         private void OnDisable()
         {
             _inputSystem.Player.MousePosition.canceled -= OnMouseMove;
+            _inputSystem.Player.Attack.performed -= OnAttack;
+            _inputSystem.Player.Attack.canceled -= OnAttack;
             _inputSystem.Disable();
         }
 
@@ -67,7 +78,6 @@ namespace FlightIGuess.Weapons.Unity
         {
             // The prompt requests physics/movement in FixedUpdate. Projectile spawning is physics-adjacent.
             // We read the input state manually (is the button held?)
-            bool isFiring = _inputSystem.Player.Attack.IsPressed();
             float dt = Time.fixedDeltaTime;
 
             for (int i = 0; i < _hardpointModels.Count; i++)
@@ -79,22 +89,48 @@ namespace FlightIGuess.Weapons.Unity
                 mouseWorldPos.z = 0f;
                 Vector2 aimDirection = mouseWorldPos - authoring.transform.position;
                 
-                // 1. Pass the target direction to the Pure C# model so it can do the rotation math
+                // Get the ship's current rotation (Z axis in 2D)
+                float shipRotation = transform.rotation.eulerAngles.z;
+                
+                // 1. Pass the target direction and ship rotation to the Pure C# model
                 var targetDir = new SysNum.Vector2(aimDirection.x, aimDirection.y);
-                model.AimTowards(targetDir, dt);
+                model.AimTowards(targetDir, dt, shipRotation);
 
                 // 2. Read the calculated angle back and apply it to the Unity Transform
                 authoring.transform.rotation = Quaternion.Euler(0, 0, model.CurrentAngleDegrees);
 
                 var pos = new SysNum.Vector2(authoring.Position.x, authoring.Position.y);
 
-                model.Tick(dt, isFiring, _poolManager, _effectPoolManager, pos);
+                model.Tick(dt, _isFiring, _poolManager, _effectPoolManager, pos);
             }
         }
 
         private void OnMouseMove(InputAction.CallbackContext callback)
         {
             _mousePosition = callback.ReadValue<Vector2>();
+        }
+
+        private void OnAttack(InputAction.CallbackContext callback)
+        {
+            _isFiring = callback.performed;
+        }
+
+        public void OnWeaponPurchased(WeaponConfigSO purchasedWeapon)
+        {
+            foreach(var hardpointModel in _hardpointModels)
+            {
+                // Must check if the slot is empty AND large enough for the weapon!
+                if(hardpointModel.EquippedWeapon == null && (int)hardpointModel.SlotSize >= (int)purchasedWeapon.WeaponSize)
+                {
+                    WeaponModel weapon = purchasedWeapon.CreateWeaponModel();
+                    hardpointModel.Equip(weapon);
+                    if(_visualBinding.TryGetValue(hardpointModel.HardpointId, out var authoring))
+                    {
+                        authoring.SetWeaponConfig(purchasedWeapon);
+                    }
+                    return; // Stop after equipping in the first valid slot
+                }
+            }
         }
 
     }

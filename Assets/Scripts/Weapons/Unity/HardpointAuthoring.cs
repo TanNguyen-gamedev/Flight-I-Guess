@@ -1,3 +1,4 @@
+using FlightIGuess.Weapons.Core;
 using PrimeTween;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace FlightIGuess.Weapons.Unity
     {
         [SerializeField] private string _hardpointId;
         [SerializeField] private WeaponConfigSO _initialWeapon;
+        [SerializeField] private HardpointSize _slotSize;
         
         [Header("Recoil Visuals")]
         [Tooltip("The transform to apply visual recoil to. If null, falls back to this transform.")]
@@ -21,6 +23,7 @@ namespace FlightIGuess.Weapons.Unity
         
         public string HardpointId => _hardpointId;
         public WeaponConfigSO InitialWeapon => _initialWeapon;
+        public HardpointSize SlotSize => _slotSize;
 
         public Transform Visuals => _visuals != null ? _visuals : transform;
 
@@ -30,6 +33,17 @@ namespace FlightIGuess.Weapons.Unity
         public void SetWeaponConfig(WeaponConfigSO config)
         {
             _currentWeaponConfig = config;
+            
+            // Clean up old visual if we are replacing it to avoid stacked sprites
+            if (_visuals != null && _visuals != transform)
+            {
+                Destroy(_visuals.gameObject);
+            }
+
+            if (config.WeaponSprite != null)
+            {
+                _visuals = Instantiate(config.WeaponSprite, transform.position, transform.rotation, transform).transform;
+            }
         }
 
         public void PlayRecoilTween()

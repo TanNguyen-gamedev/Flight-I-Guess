@@ -1,37 +1,40 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
+using TMPro;
+using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
-    [SerializeField] private UIDocument _uIDocument;
+    [Header("UI Components")]
+    [SerializeField] private TextMeshProUGUI _scoreText;
+    [SerializeField] private TextMeshProUGUI _highScoreText;
+    [SerializeField] private Button _restartButton;
+    [SerializeField] private TextMeshProUGUI _scrapText;
+    [SerializeField] private TextMeshProUGUI _coresText;
+
+    [Header("Events")]
     [SerializeField] private FloatEventChannel _onScoreChange;
     [SerializeField] private VoidEventChannel _onGameOver;
     [SerializeField] private FloatEventChannel _onHighestScore;
-    
-    private Button _restartButton;
-    private Label _scoreText;
-    private Label _highScoreText;
-
-    private void Awake()
-    {
-        _scoreText = _uIDocument.rootVisualElement.Q<Label>("ScoreLabel");
-        _restartButton = _uIDocument.rootVisualElement.Q<Button>("RestartButton");
-        _highScoreText = _uIDocument.rootVisualElement.Q<Label>("HighScore");
-    }
 
     private void Start()
     {
-        _restartButton.style.display = DisplayStyle.None;
-        _highScoreText.style.display = DisplayStyle.None;
+        if (_restartButton != null) _restartButton.gameObject.SetActive(false);
+        if (_highScoreText != null) _highScoreText.gameObject.SetActive(false);
+        
+        // Initialize text
+        if (_scrapText != null) _scrapText.text = "Scrap: 0";
+        if (_coresText != null) _coresText.text = "Cores: 0";
+        if (_scoreText != null) _scoreText.text = "Score: 0";
     }
 
     private void OnEnable()
     {
-        _onScoreChange.OnEventRaise += OnScoreChange;
-        _onGameOver.OnEventRaise += OnGameOver;
-        _restartButton.clicked += ReloadScene;
-        _onHighestScore.OnEventRaise += OnHighScore;
+        if (_onScoreChange != null) _onScoreChange.OnEventRaise += OnScoreChange;
+        if (_onGameOver != null) _onGameOver.OnEventRaise += OnGameOver;
+        if (_onHighestScore != null) _onHighestScore.OnEventRaise += OnHighScore;
+        
+        if (_restartButton != null) _restartButton.onClick.AddListener(ReloadScene);
         
         // Find ScrapPoolManager and subscribe to resource events
         var scrapManager = FindFirstObjectByType<ScrapPoolManager>();
@@ -44,10 +47,11 @@ public class HUD : MonoBehaviour
 
     private void OnDisable()
     {
-        _onScoreChange.OnEventRaise -= OnScoreChange;
-        _onGameOver.OnEventRaise -= OnGameOver;
-        _restartButton.clicked -= ReloadScene;
-        _onHighestScore.OnEventRaise -= OnHighScore;
+        if (_onScoreChange != null) _onScoreChange.OnEventRaise -= OnScoreChange;
+        if (_onGameOver != null) _onGameOver.OnEventRaise -= OnGameOver;
+        if (_onHighestScore != null) _onHighestScore.OnEventRaise -= OnHighScore;
+        
+        if (_restartButton != null) _restartButton.onClick.RemoveListener(ReloadScene);
         
         var scrapManager = FindFirstObjectByType<ScrapPoolManager>();
         if (scrapManager != null && scrapManager.RunStateModel != null)
@@ -59,25 +63,23 @@ public class HUD : MonoBehaviour
 
     private void OnScrapChange(int totalScrap)
     {
-        // Update Scrap UI here - for now we'll just update the score text as a placeholder
-        // until you add a dedicated Scrap label to your UI Document
-        _scoreText.text = "Scrap: " + totalScrap;
+        if (_scrapText != null) _scrapText.text = "Scrap: " + totalScrap;
     }
     
     private void OnCoresChange(int totalCores)
     {
-        // Update Cores UI here
+        if (_coresText != null) _coresText.text = "Cores: " + totalCores;
     }
 
     private void OnScoreChange(float score)
     {
         int roundedScore = Mathf.RoundToInt(score);
-        _scoreText.text = "Score: " + roundedScore;
+        if (_scoreText != null) _scoreText.text = "Score: " + roundedScore;
     }
 
     private void OnGameOver()
     {
-        _restartButton.style.display = DisplayStyle.Flex;
+        if (_restartButton != null) _restartButton.gameObject.SetActive(true);
     }
 
     private void ReloadScene()
@@ -87,8 +89,10 @@ public class HUD : MonoBehaviour
 
     private void OnHighScore(float highScore)
     {
-        _highScoreText.style.display = DisplayStyle.Flex;
-        _highScoreText.text = "HIGH SCORE: " + Mathf.FloorToInt(highScore);
+        if (_highScoreText != null)
+        {
+            _highScoreText.gameObject.SetActive(true);
+            _highScoreText.text = "HIGH SCORE: " + Mathf.FloorToInt(highScore);
+        }
     }
-
 }

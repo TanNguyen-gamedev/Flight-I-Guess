@@ -8,12 +8,14 @@ public class RunStateModel
     public event Action<int> OnTotalScrapChanged;
     public event Action<int> OnTotalCoresChanged;
 
-    private int _totalScrap;
-    private int _totalCores;
+    private int _currentScrap;
+    private int _currentCores;
 
     private float MagnetRadiusSquare;
 
     private List<ScrapModel> _activeScraps = new List<ScrapModel>();
+
+    public int CurrentScrap => _currentScrap;
 
     public void SetMagnetRadius(float radius)
     {
@@ -50,16 +52,22 @@ public class RunStateModel
     {
         if (scrapModel.Type == ResourceType.Scrap)
         {
-            _totalScrap += scrapModel.Amount;
-            OnTotalScrapChanged?.Invoke(_totalScrap);
+            _currentScrap += scrapModel.Amount;
+            OnTotalScrapChanged?.Invoke(_currentScrap);
         }
         else if (scrapModel.Type == ResourceType.Core)
         {
-            _totalCores += scrapModel.Amount;
-            OnTotalCoresChanged?.Invoke(_totalCores);
+            _currentCores += scrapModel.Amount;
+            OnTotalCoresChanged?.Invoke(_currentCores);
         }
         
         _activeScraps.Remove(scrapModel);
+    }
+
+    public void SpendScrap(int amount)
+    {
+        _currentScrap -= amount;
+        OnTotalScrapChanged?.Invoke(_currentScrap);
     }
 
 }

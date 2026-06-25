@@ -1,6 +1,5 @@
-
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class EnemyController : MonoBehaviour
 {
@@ -18,12 +17,13 @@ public class EnemyController : MonoBehaviour
 
     private bool _canAttack = true;
     private Rigidbody2D _rb;
+    private IObjectPool<EnemyController> _pool;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
+    public void Init(IObjectPool<EnemyController> pool)
     {
+        _pool = pool;
         _rb = GetComponent<Rigidbody2D>();
-        float randomScale = Random.Range(_minSize, _maxSize);
+        float randomScale = UnityEngine.Random.Range(_minSize, _maxSize);
         _enemyPoint = _basePoint * randomScale;
         transform.localScale = new Vector3(randomScale, randomScale, 1f);
     }
@@ -42,7 +42,7 @@ public class EnemyController : MonoBehaviour
         {
             _onEnemyDeathFloat.RaiseEvent(_enemyPoint);
             _onEnemyDeath.RaiseEvent(transform.position, Mathf.FloorToInt(_enemyPoint), ResourceType.Scrap);            
-            Destroy(gameObject);
+            _pool.Release(this);
         }
     }
 
@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour
         {
             _onEnemyDeathFloat.RaiseEvent(_enemyPoint);
             _onEnemyDeath.RaiseEvent(transform.position, Mathf.FloorToInt(_enemyPoint), ResourceType.Scrap);            
-            Destroy(gameObject);
+            _pool.Release(this);
         }
     }
 

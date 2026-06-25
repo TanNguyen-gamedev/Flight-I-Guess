@@ -1,6 +1,9 @@
 using UnityEngine;
 using PrimeTween;
 using FlightIGuess.Weapons.Core;
+using FlightIGuess.Shop.Core;
+using UnityEngine.UI;
+
 
 namespace FlightIGuess.Weapons.Unity
 {
@@ -32,6 +35,10 @@ namespace FlightIGuess.Weapons.Unity
         
         [Tooltip("The ID of the effect to spawn from the EffectPoolManager")]
         public string EffectId;
+        [Tooltip("The icon of weapon when display in shop as item")]
+        public Sprite WeaponIcon;
+        [Tooltip("Game Object visual for the weapon to mount on the hard point")]
+        public GameObject WeaponSprite;
 
         [Header("Trigger Settings")]
         public TriggerType TriggerType = TriggerType.AutoFire;
@@ -60,6 +67,12 @@ namespace FlightIGuess.Weapons.Unity
         [Tooltip("How fast the hardpoint can rotate when this weapon is equipped (degrees per second)")]
         public float TurnRateDegreesPerSecond = 360f;
 
+        [Tooltip("The total arc range in degrees this weapon can aim within (e.g., 90 means 45 degrees left and right). 360 means full rotation.")]
+        public float FiringArcDegrees = 360f;
+        [Header("Shop Settings")]
+        public int Cost = 100;
+        public HardpointSize WeaponSize = HardpointSize.Small;
+
         /// <summary>
         /// Factory method to create the pure C# model from this Unity data.
         /// </summary>
@@ -82,6 +95,20 @@ namespace FlightIGuess.Weapons.Unity
             };
 
             return new WeaponModel(trigger, emitter, ProjectileId, EffectId);
+        }
+
+        /// <summary>
+        /// Factory method to create the shop model from this Unity data.
+        /// </summary>
+        public ShopItem CreateShopItem()
+        {
+            ShopItem item = new ShopItem();
+            item.ItemName = WeaponId;
+            item.Cost = Cost;
+            item.IsWeapon = true;
+            item.WeaponSize = WeaponSize;
+            item.HullUpgradeTier = Ship.Core.HullTier.Fighter;
+            return item;
         }
     }
 }

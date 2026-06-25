@@ -33,8 +33,6 @@ public class ScrapPresenter: MonoBehaviour
         }
         else if (_playerTransform != null)
         {
-            // Fallback: If PrimeTween doesn't support dynamic tracking in this version,
-            // we handle the interpolation manually in Update.
             transform.position = Vector3.MoveTowards(
                 transform.position, 
                 _playerTransform.position, 
@@ -51,8 +49,7 @@ public class ScrapPresenter: MonoBehaviour
 
     private void HandleMagnetized()
     {
-        // Removed PrimeTween here. We now handle the movement in Update() 
-        // to guarantee it tracks the moving player without version-specific PrimeTween features.
+        
     }
 
     private void OnReachedPlayer()
