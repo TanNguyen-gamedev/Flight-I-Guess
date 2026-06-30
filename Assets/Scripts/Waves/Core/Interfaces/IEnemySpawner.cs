@@ -1,7 +1,7 @@
 using System;
 using System.Numerics;
 
-namespace Core.Waves
+namespace FlightIGuess.Waves.Core
 {
     public interface IEnemySpawner
     {

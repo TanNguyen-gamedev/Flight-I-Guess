@@ -15,6 +15,8 @@ MonoBehaviour:
   WeaponId: Shotgun
   ProjectileId: Sharp
   EffectId: MuzzleFlash
+  WeaponIcon: {fileID: 21300008, guid: 23a10fa0df1140746adb7bda3d420aba, type: 3}
+  WeaponSprite: {fileID: 4359466148242515080, guid: f17929496826f374692a3262aa72e7c3, type: 3}
   TriggerType: 0
   FireRatePerSecond: 0.5
   ChargeTimeSeconds: 1
@@ -55,3 +57,6 @@ MonoBehaviour:
     _useFixedUpdate: 0
     _updateType: 0
   TurnRateDegreesPerSecond: 90
+  FiringArcDegrees: 360
+  Cost: 100
+  WeaponSize: 0

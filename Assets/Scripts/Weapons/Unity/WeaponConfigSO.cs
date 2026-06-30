@@ -58,7 +58,8 @@ namespace FlightIGuess.Weapons.Unity
         [Tooltip("Only used if EmitterType is Spread")]
         public float SpreadAngleDegrees = 30f;
 
-        [Header("Recoil Visuals")]
+        [Header("Recoil Settings")]
+        public float RecoilForce = 100f;
         public float RecoilDistance = 0.2f;
         public TweenSettings RecoilOutSettings = new TweenSettings(0.05f, Ease.OutQuad);
         public TweenSettings RecoilReturnSettings = new TweenSettings(0.1f, Ease.InOutQuad);
@@ -67,8 +68,6 @@ namespace FlightIGuess.Weapons.Unity
         [Tooltip("How fast the hardpoint can rotate when this weapon is equipped (degrees per second)")]
         public float TurnRateDegreesPerSecond = 360f;
 
-        [Tooltip("The total arc range in degrees this weapon can aim within (e.g., 90 means 45 degrees left and right). 360 means full rotation.")]
-        public float FiringArcDegrees = 360f;
         [Header("Shop Settings")]
         public int Cost = 100;
         public HardpointSize WeaponSize = HardpointSize.Small;
@@ -94,7 +93,7 @@ namespace FlightIGuess.Weapons.Unity
                 _ => new SingleShotEmitter()
             };
 
-            return new WeaponModel(trigger, emitter, ProjectileId, EffectId);
+            return new WeaponModel(trigger, emitter, ProjectileId, EffectId, RecoilForce);
         }
 
         /// <summary>
@@ -102,12 +101,14 @@ namespace FlightIGuess.Weapons.Unity
         /// </summary>
         public ShopItem CreateShopItem()
         {
-            ShopItem item = new ShopItem();
-            item.ItemName = WeaponId;
-            item.Cost = Cost;
-            item.IsWeapon = true;
-            item.WeaponSize = WeaponSize;
-            item.HullUpgradeTier = Ship.Core.HullTier.Fighter;
+            ShopItem item = new ShopItem
+            {
+                ItemName = WeaponId,
+                Cost = Cost,
+                IsWeapon = true,
+                WeaponSize = WeaponSize,
+                HullUpgradeTier = Ship.Core.HullTier.Fighter
+            };
             return item;
         }
     }

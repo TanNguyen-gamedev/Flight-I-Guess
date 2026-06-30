@@ -2,31 +2,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 using SysNum = System.Numerics;
+using FlightIGuess.Core;
+using FlightIGuess.Gathering.Unity;
 
 public class ScrapPoolManager : MonoBehaviour
 {
     [SerializeField] private ScrapPresenter _scrapPrefab;
-    [SerializeField] private ScrapConfigSO _config;
-    [SerializeField] private Transform _playerTransform;
     [SerializeField] private EnemyDeathEventChannel _onEnemyDeath;
     
     [Header("Pool Settings")]
     [SerializeField] private int _defaultCapacity = 50;
     [SerializeField] private int _maxSize = 200;
-
+    private RunStatePresenter _runStatePresenter;
     private IObjectPool<ScrapPresenter> _pool;
-    private RunStateModel _runStateModel;
     
-    // Public accessor so the HUD can subscribe to events
-    public RunStateModel RunStateModel => _runStateModel;
-
     private void Awake()
     {
-        // 1. Initialize the Core C# Model
-        _runStateModel = new RunStateModel();
-        _runStateModel.SetMagnetRadius(_config.MagnetRange);
-
-        // 2. Setup the Unity Object Pool
+        // 1. Register with Master Pool Manager
+        var poolManager = Bootstrapper.Instance.GetManager<PoolManager>();
+        if(poolManager != null)
+        {
+            poolManager.RegisterPool(this);
+        }
+    
+        // . Setup the Unity Object Pool
         _pool = new ObjectPool<ScrapPresenter>(
             createFunc: CreateScrap,
             actionOnGet: s => s.gameObject.SetActive(true),
@@ -36,6 +35,15 @@ public class ScrapPoolManager : MonoBehaviour
             defaultCapacity: _defaultCapacity,
             maxSize: _maxSize
         );
+    }
+    private void Start()
+    {
+        _runStatePresenter = Bootstrapper.Instance.GetManager<RunStatePresenter>();
+        if (_runStatePresenter == null)
+        {
+            Debug.LogError("ScrapPoolManager: Cannot spawn scrap, RunStatePresenter is missing!");
+            return;
+        }
     }
 
     private void OnEnable()
@@ -48,25 +56,18 @@ public class ScrapPoolManager : MonoBehaviour
         _onEnemyDeath.OnEventRaise -= OnEnemyDeath;
     }
 
-    private void Update()
-    {
-        if (_playerTransform == null) return;
-
-        // Drive the C# tick from Unity's Update loop
-        var playerPos = new SysNum.Vector2(
-            _playerTransform.position.x, 
-            _playerTransform.position.y
-        );
-        
-        _runStateModel.Tick(playerPos);
-    }
-
     /// <summary>
     /// Spawns a resource drop at the given position.
     /// Supports dynamic amounts and types so different enemies can drop different loot.
     /// </summary>
     public void SpawnScrap(Vector3 spawnPosition, int amount, ResourceType type)
     {
+        if (_runStatePresenter == null)
+        {
+            Debug.LogError("ScrapPoolManager: Cannot spawn scrap, RunStatePresenter is missing!");
+            return;
+        }
+
         // Get a visual presenter from the pool
         var presenter = _pool.Get();
         presenter.transform.position = spawnPosition;
@@ -80,11 +81,12 @@ public class ScrapPoolManager : MonoBehaviour
         // Initialize with dynamic amount and type!
         scrapModel.Init(amount, type, sysNumPos);
 
+
         // Link them together
-        presenter.Init(scrapModel, _runStateModel, _config, _playerTransform, _pool);
+        presenter.Init(scrapModel, _runStatePresenter.RunStateModel, _runStatePresenter.Config, _runStatePresenter.PlayerTransform, _pool);
 
         // Tell the Core State Manager to start checking distance for this scrap
-        _runStateModel.AddScrapToTracking(scrapModel);
+        _runStatePresenter.RunStateModel.AddScrapToTracking(scrapModel);
     }
 
     private ScrapPresenter CreateScrap()

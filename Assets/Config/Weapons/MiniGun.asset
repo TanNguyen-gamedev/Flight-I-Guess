@@ -18,11 +18,12 @@ MonoBehaviour:
   WeaponIcon: {fileID: 21300004, guid: 23a10fa0df1140746adb7bda3d420aba, type: 3}
   WeaponSprite: {fileID: 5073957694189629627, guid: 73f96b57e9b574a4f9ac6ca86a61e87c, type: 3}
   TriggerType: 0
-  FireRatePerSecond: 1
+  FireRatePerSecond: 10
   ChargeTimeSeconds: 1
   EmitterType: 0
   ProjectileCount: 3
   SpreadAngleDegrees: 30
+  RecoilForce: 1
   RecoilDistance: 0.2
   RecoilOutSettings:
     duration: 0.05
@@ -57,6 +58,5 @@ MonoBehaviour:
     _useFixedUpdate: 0
     _updateType: 0
   TurnRateDegreesPerSecond: 180
-  FiringArcDegrees: 90
   Cost: 100
   WeaponSize: 0

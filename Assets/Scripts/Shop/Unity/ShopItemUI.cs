@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using FlightIGuess.Weapons.Unity;
+using JetBrains.Annotations;
+using FlightIGuess.Shop.Core;
 
 namespace FlightIGuess.Shop.Unity
 {
@@ -62,12 +64,17 @@ namespace FlightIGuess.Shop.Unity
 
         private void OnBuyClicked()
         {
-            _shopPresenter.TryBuyWeapon(_weaponConfig);
+            _shopPresenter.TryBuyWeapon(_weaponConfig, this);
         }
 
         private void OnDestroy()
         {
             _buyButton.onClick.RemoveListener(OnBuyClicked);
+        }
+
+        public void OnItemPurchaseSuccess(ShopItem item)
+        {
+            Destroy(gameObject);
         }
     }
 }

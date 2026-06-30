@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using UnityEditorInternal;
 
 namespace FlightIGuess.Weapons.Core
 {
@@ -8,7 +9,7 @@ namespace FlightIGuess.Weapons.Core
     /// </summary>
     public class HardpointModel
     {
-        public event Action OnWeaponFired;
+        public event Action<float, Vector2> OnWeaponFired;
 
         public string HardpointId { get; }
         public HardpointSize SlotSize;
@@ -44,9 +45,9 @@ namespace FlightIGuess.Weapons.Core
             }
         }
 
-        private void HandleWeaponFired()
+        private void HandleWeaponFired(float recoilForce, Vector2 direction)
         {
-            OnWeaponFired?.Invoke();
+            OnWeaponFired?.Invoke(recoilForce, direction);
         }
 
         public void AimTowards(Vector2 targetDirection, float deltaTime, float shipRotationDegrees)

@@ -4,6 +4,7 @@ using FlightIGuess.Weapons.Core;
 using SysNum = System.Numerics;
 using UnityEngine.InputSystem;
 using PrimeTween;
+using FlightIGuess.Core;
 
 namespace FlightIGuess.Weapons.Unity
 {
@@ -13,7 +14,7 @@ namespace FlightIGuess.Weapons.Unity
     public class ShipWeaponsPresenter : MonoBehaviour
     {
         [SerializeField] private HardpointAuthoring[] _hardpointAuthorings;
-        [SerializeField] private ProjectilePoolManager _poolManager;
+        [SerializeField] private ProjectilePoolManager _projectilePoolManager;
         [SerializeField] private EffectPoolManager _effectPoolManager;
         
         // In a real game, this would be injected or read from an InputManager.
@@ -31,6 +32,8 @@ namespace FlightIGuess.Weapons.Unity
             _inputSystem = new InputSystem_Actions();
             _hardpointModels = new List<HardpointModel>();
             _visualBinding = new Dictionary<string, HardpointAuthoring>();
+            _projectilePoolManager = Bootstrapper.Instance.GetManager<ProjectilePoolManager>();
+            _effectPoolManager = Bootstrapper.Instance.GetManager<EffectPoolManager>();
 
             // Initialize models
             foreach (var authoring in _hardpointAuthorings)
@@ -44,7 +47,7 @@ namespace FlightIGuess.Weapons.Unity
                     var weapon = authoring.InitialWeapon.CreateWeaponModel();
                     hardpointModel.Equip(weapon);
                     hardpointModel.TurnRateDegreesPerSecond = authoring.InitialWeapon.TurnRateDegreesPerSecond;
-                    hardpointModel.ArcRangeDegrees = authoring.InitialWeapon.FiringArcDegrees;
+                    hardpointModel.ArcRangeDegrees = authoring.ArcRangeDegrees;
                     
                     // Pass the config to the authoring component so it knows its visual recoil profile
                     authoring.SetWeaponConfig(authoring.InitialWeapon);
@@ -101,7 +104,7 @@ namespace FlightIGuess.Weapons.Unity
 
                 var pos = new SysNum.Vector2(authoring.Position.x, authoring.Position.y);
 
-                model.Tick(dt, _isFiring, _poolManager, _effectPoolManager, pos);
+                model.Tick(dt, _isFiring, _projectilePoolManager, _effectPoolManager, pos);
             }
         }
 
@@ -128,6 +131,9 @@ namespace FlightIGuess.Weapons.Unity
                     {
                         authoring.SetWeaponConfig(purchasedWeapon);
                     }
+                    hardpointModel.TurnRateDegreesPerSecond = purchasedWeapon.TurnRateDegreesPerSecond;
+                    hardpointModel.ArcRangeDegrees = authoring.ArcRangeDegrees;
+
                     return; // Stop after equipping in the first valid slot
                 }
             }

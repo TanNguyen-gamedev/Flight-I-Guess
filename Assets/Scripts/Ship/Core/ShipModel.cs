@@ -1,14 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Numerics;
 using FlightIGuess.Weapons.Core;
+
+using FlightIGuess.Combat.Core;
 
 namespace FlightIGuess.Ship.Core
 {
     public struct ShipModelStats
     {
         public float MaxHP;
-        public float ThrustForce;
+        public float Acceleration;
+        public float MaxSpeed;
         public int TurnRate;
         public HullTier HullTier;
         public List<HardpointModel> ActiveHardPoint;
@@ -22,16 +26,18 @@ namespace FlightIGuess.Ship.Core
     /// </summary>
     public class ShipModel
     {
-        // TODO: Implement stats (MaxHP, Thrust, TurnRate)
         public ShipModelStats Stats;
+        public HealthModel Health { get; private set; }
+        
         public event Action<ShipModelStats> OnHullUpgrade;
+        public event Action<float, Vector2> OnShipRecoil;
 
-        // TODO: Implement hardpoint tracking based on HullTier
         private List<HardpointModel> _activeHardPoint;
-        public ShipModel(ShipModelStats stats)
+        public ShipModel(ShipModelStats stats, HealthModel healthModel)
         {
             _activeHardPoint = new List<HardpointModel>();
             Stats = stats;
+            Health = healthModel;
             Stats.ActiveHardPoint = _activeHardPoint;
         }
 
@@ -46,11 +52,18 @@ namespace FlightIGuess.Ship.Core
                 else
                 {
                     _activeHardPoint.Add(hardpoint);
+                    // Use a wrapper/lambda so we don't try to assign event to event
+                    hardpoint.OnWeaponFired -= HandleWeaponFired; // Prevent double subscription
+                    hardpoint.OnWeaponFired += HandleWeaponFired;
                 }
             }
             Stats.ActiveHardPoint = _activeHardPoint;
         }
-        // TODO: Implement UpgradeHull() logic
+
+        private void HandleWeaponFired(float recoilForce, Vector2 direction)
+        {
+            OnShipRecoil?.Invoke(recoilForce, direction);
+        }
         public void UpgradeHull(ShipModelStats stats)
         {  
             _activeHardPoint.Clear();

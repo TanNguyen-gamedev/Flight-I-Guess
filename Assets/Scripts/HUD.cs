@@ -1,16 +1,18 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using FlightIGuess.Core;
+using FlightIGuess.Gathering.Unity;
 
 public class HUD : MonoBehaviour
 {
     [Header("UI Components")]
+    [SerializeField] private Canvas _hudCanvas;
     [SerializeField] private TextMeshProUGUI _scoreText;
-    [SerializeField] private TextMeshProUGUI _highScoreText;
-    [SerializeField] private Button _restartButton;
     [SerializeField] private TextMeshProUGUI _scrapText;
     [SerializeField] private TextMeshProUGUI _coresText;
+    [SerializeField] private TextMeshProUGUI _missionTitleText;
+    [SerializeField] private Slider _progressBar;
 
     [Header("Events")]
     [SerializeField] private FloatEventChannel _onScoreChange;
@@ -19,45 +21,34 @@ public class HUD : MonoBehaviour
 
     private void Start()
     {
-        if (_restartButton != null) _restartButton.gameObject.SetActive(false);
-        if (_highScoreText != null) _highScoreText.gameObject.SetActive(false);
-        
         // Initialize text
         if (_scrapText != null) _scrapText.text = "Scrap: 0";
         if (_coresText != null) _coresText.text = "Cores: 0";
         if (_scoreText != null) _scoreText.text = "Score: 0";
+        
     }
 
     private void OnEnable()
     {
         if (_onScoreChange != null) _onScoreChange.OnEventRaise += OnScoreChange;
-        if (_onGameOver != null) _onGameOver.OnEventRaise += OnGameOver;
-        if (_onHighestScore != null) _onHighestScore.OnEventRaise += OnHighScore;
-        
-        if (_restartButton != null) _restartButton.onClick.AddListener(ReloadScene);
-        
-        // Find ScrapPoolManager and subscribe to resource events
-        var scrapManager = FindFirstObjectByType<ScrapPoolManager>();
-        if (scrapManager != null && scrapManager.RunStateModel != null)
+    
+        var runStatePresenter = Bootstrapper.Instance.GetManager<RunStatePresenter>();
+        if (runStatePresenter != null && runStatePresenter.RunStateModel != null)
         {
-            scrapManager.RunStateModel.OnTotalScrapChanged += OnScrapChange;
-            scrapManager.RunStateModel.OnTotalCoresChanged += OnCoresChange;
+            runStatePresenter.RunStateModel.OnTotalScrapChanged += OnScrapChange;
+            runStatePresenter.RunStateModel.OnTotalCoresChanged += OnCoresChange;
         }
     }
 
     private void OnDisable()
     {
         if (_onScoreChange != null) _onScoreChange.OnEventRaise -= OnScoreChange;
-        if (_onGameOver != null) _onGameOver.OnEventRaise -= OnGameOver;
-        if (_onHighestScore != null) _onHighestScore.OnEventRaise -= OnHighScore;
         
-        if (_restartButton != null) _restartButton.onClick.RemoveListener(ReloadScene);
-        
-        var scrapManager = FindFirstObjectByType<ScrapPoolManager>();
-        if (scrapManager != null && scrapManager.RunStateModel != null)
+        var runStatePresenter = FindFirstObjectByType<FlightIGuess.Gathering.Unity.RunStatePresenter>();
+        if (runStatePresenter != null && runStatePresenter.RunStateModel != null)
         {
-            scrapManager.RunStateModel.OnTotalScrapChanged -= OnScrapChange;
-            scrapManager.RunStateModel.OnTotalCoresChanged -= OnCoresChange;
+            runStatePresenter.RunStateModel.OnTotalScrapChanged -= OnScrapChange;
+            runStatePresenter.RunStateModel.OnTotalCoresChanged -= OnCoresChange;
         }
     }
 
@@ -77,22 +68,21 @@ public class HUD : MonoBehaviour
         if (_scoreText != null) _scoreText.text = "Score: " + roundedScore;
     }
 
-    private void OnGameOver()
+    public void OnMissionProgressUpdate(string title, float progress)
     {
-        if (_restartButton != null) _restartButton.gameObject.SetActive(true);
-    }
-
-    private void ReloadScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    private void OnHighScore(float highScore)
-    {
-        if (_highScoreText != null)
+        if(_missionTitleText != null)
         {
-            _highScoreText.gameObject.SetActive(true);
-            _highScoreText.text = "HIGH SCORE: " + Mathf.FloorToInt(highScore);
+            _missionTitleText.text = title;
+        }
+        if(_progressBar != null)
+        {
+            _progressBar.value = progress;
         }
     }
+
+    public void OnWaveAction(bool isWaveEnded)
+    {
+        _hudCanvas.enabled = !isWaveEnded;
+    }
+
 }

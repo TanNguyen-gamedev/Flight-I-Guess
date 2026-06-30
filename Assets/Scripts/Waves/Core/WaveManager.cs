@@ -1,9 +1,14 @@
 using System;
 using System.Numerics;
-using FlightIGuess.Waves.Core.Interfaces;
+using FlightIGuess.Waves.Core;
 
-namespace Core.Waves
+namespace FlightIGuess.Waves.Core
 {
+    public struct WaveEndedEvent
+    {
+        public int WaveNumber;
+    }
+
     public class WaveManager
     {
         public event Action<int> OnWaveStarted;
@@ -14,13 +19,16 @@ namespace Core.Waves
         private readonly float _spawnRadius;
         private Random _random;
 
-        public int CurrentWave { get; private set; } = 1;
-        public float WaveDuration { get; private set; } = 10f; // 60 seconds per wave, 10 when testing
-        public float TimeRemaining { get; private set; }
+        private IWaveMission _currentMission;
+        private int _currentWave = 0;
+        public int CurrentWave => _currentWave;
+
         public bool IsWaveActive { get; private set; }
         
         private float _spawnTimer = 0f;
         private float _spawnInterval = 2f;
+        public event Action<IWaveMission> OnMissionStarted;
+        public event Action<string, float> OnMissionProgressChanged;
 
         public WaveManager(IEnemySpawner enemySpawner, float spawnRadius)
         {
@@ -29,28 +37,30 @@ namespace Core.Waves
             _random = new Random();
         }
 
-        public void StartWave()
+        public void StartWave(IWaveMission mission)
         {
-            TimeRemaining = WaveDuration;
+            _currentMission = mission;
+            _currentMission.OnProgressUpdate += HandleProgressUpdate;
+            _currentMission.Start();
+
             IsWaveActive = true;
-            _spawnInterval = Math.Max(0.5f, 2f - (CurrentWave * 0.1f)); // Spawns get faster each wave
+            OnMissionStarted?.Invoke(_currentMission);
             OnWaveStarted?.Invoke(CurrentWave);
         }
 
         public void Tick(float deltaTime, Vector2 playerPosition)
         {
             if (!IsWaveActive) return;
-
-            TimeRemaining -= deltaTime;
-            OnWaveTimerChanged?.Invoke(TimeRemaining);
-
-            if (TimeRemaining <= 0)
+            
+            _currentMission.Tick(deltaTime);
+            
+            if(_currentMission.IsComplete)
             {
                 EndWave();
                 return;
             }
 
-            // Handle Spawning synchronously based on deltaTime
+            // Handle Spawning
             _spawnTimer -= deltaTime;
             if (_spawnTimer <= 0)
             {
@@ -58,12 +68,22 @@ namespace Core.Waves
                 _spawnTimer = _spawnInterval;
             }
         }
-
+         
         private void EndWave()
         {
+            _currentMission.OnProgressUpdate -= HandleProgressUpdate;
             IsWaveActive = false;
             OnWaveEnded?.Invoke(CurrentWave);
-            CurrentWave++;
+            
+            // Raise an event to notify systems that the wave has ended
+            FlightIGuess.Core.EventBus.Raise(new WaveEndedEvent { WaveNumber = CurrentWave });
+            
+            _currentWave++;
+        }
+
+        public void OnEnemyDefeated()
+        {
+            _currentMission?.OnEnemyDefeated();
         }
 
         public void RequestSpawn(Vector2 playerPosition)
@@ -83,6 +103,11 @@ namespace Core.Waves
 
             // Add offset to player's current position
             return new Vector2(playerPosition.X + offsetX, playerPosition.Y + offsetY);
+        }
+
+        private void HandleProgressUpdate(float progress)
+        {
+            OnMissionProgressChanged?.Invoke(_currentMission.Title, progress);
         }
     }
 }

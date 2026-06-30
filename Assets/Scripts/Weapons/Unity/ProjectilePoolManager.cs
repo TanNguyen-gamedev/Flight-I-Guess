@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using FlightIGuess.Weapons.Core;
 using SysNum = System.Numerics;
+using FlightIGuess.Core;
 
 namespace FlightIGuess.Weapons.Unity
 {
@@ -18,14 +19,20 @@ namespace FlightIGuess.Weapons.Unity
     public class ProjectilePoolManager : MonoBehaviour, IProjectileSpawner
     {
         [SerializeField] private ProjectilePoolConfig[] _poolConfigs;
-        [SerializeField] private EffectPoolManager _effectPoolManager;
 
-        private Dictionary<string, IObjectPool<PooledProjectile>> _pools;
+        private Dictionary<string, IObjectPool<PooledProjectile>> _projectilePools;
 
         private void Awake()
         {
-            _pools = new Dictionary<string, IObjectPool<PooledProjectile>>();
-
+            _projectilePools = new Dictionary<string, IObjectPool<PooledProjectile>>();
+            var poolManager = Bootstrapper.Instance.GetManager<PoolManager>();
+            if(poolManager == null)
+            {
+                Debug.LogError("PoolManager not found in the scene!");
+                return;
+            }
+            poolManager.RegisterPool(this);
+            
             foreach (var config in _poolConfigs)
             {
                 // Capture config for the lambda closures
@@ -46,24 +53,18 @@ namespace FlightIGuess.Weapons.Unity
                     maxSize: currentConfig.MaxSize
                 );
 
-                _pools.Add(currentConfig.ProjectileId, pool);
+                _projectilePools.Add(currentConfig.ProjectileId, pool);
             }
         }
 
         public void Spawn(string projectileId, SysNum.Vector2 position, SysNum.Vector2 direction)
         {
-            if (_pools.TryGetValue(projectileId, out var pool))
+            if (_projectilePools.TryGetValue(projectileId, out var pool))
             {
                 var projectile = pool.Get();
                 
                 // Inject the pool reference immediately upon getting it
                 projectile.SetPool(pool);
-                
-                // Inject the effect spawner so the projectile can spawn explosions
-                if (_effectPoolManager != null)
-                {
-                    projectile.SetEffectSpawner(_effectPoolManager);
-                }
                 
                 projectile.transform.position = new Vector3(position.X, position.Y, 0f);
                 

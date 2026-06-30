@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using FlightIGuess.Weapons.Core;
 using SysNum = System.Numerics;
+using FlightIGuess.Core;
 
 namespace FlightIGuess.Weapons.Unity
 {
@@ -24,6 +25,13 @@ namespace FlightIGuess.Weapons.Unity
         private void Awake()
         {
             _effectPools = new Dictionary<string, IObjectPool<PooledEffect>>();
+            var poolManager = Bootstrapper.Instance.GetManager<PoolManager>();
+            if(poolManager == null)
+            {
+                Debug.LogError("PoolManager not found in the scene!");
+                return;
+            }
+            poolManager.RegisterPool(this);
 
             foreach (var config in _effectPoolConfigs)
             {
@@ -45,6 +53,21 @@ namespace FlightIGuess.Weapons.Unity
 
                 _effectPools.Add(currentConfig.EffectId, pool);
             }
+        }
+
+        private void OnEnable()
+        {
+            EventBus.Subscribe<SpawnEffectEvent>(OnSpawnEffectEvent);
+        }
+
+        private void OnDisable()
+        {
+            EventBus.Unsubscribe<SpawnEffectEvent>(OnSpawnEffectEvent);
+        }
+
+        private void OnSpawnEffectEvent(SpawnEffectEvent evt)
+        {
+            Spawn(evt.EffectId, evt.Position, evt.Direction);
         }
 
         public void Spawn(string effectId, SysNum.Vector2 position, SysNum.Vector2 direction)

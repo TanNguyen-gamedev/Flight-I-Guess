@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.Pool;
+using FlightIGuess.Core;
+using FlightIGuess.Weapons.Core;
+using FlightIGuess.Combat.Core;
 
 namespace FlightIGuess.Weapons.Unity
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PooledProjectile : MonoBehaviour
+    public class PooledProjectile : MonoBehaviour, IKinematicBody
     {
         [SerializeField] private float _speed = 10f;
         [SerializeField] private float _lifeTime = 2f;
@@ -12,9 +15,12 @@ namespace FlightIGuess.Weapons.Unity
         [SerializeField] private TrailRenderer _trail;
         
         private Rigidbody2D _rb;
-        private IObjectPool<PooledProjectile> _pool;
-        private FlightIGuess.Weapons.Core.IEffectSpawner _effectSpawner;
+        private IObjectPool<PooledProjectile> _projectilePool;
         private float _currentLifeTimer;
+
+        public float Mass => _rb.mass;
+
+        public System.Numerics.Vector2 ForwardDirection => new System.Numerics.Vector2(_rb.linearVelocity.x, _rb.linearVelocity.y);
 
         private void Awake()
         {
@@ -24,12 +30,7 @@ namespace FlightIGuess.Weapons.Unity
 
         public void SetPool(IObjectPool<PooledProjectile> pool)
         {
-            _pool = pool;
-        }
-
-        public void SetEffectSpawner(FlightIGuess.Weapons.Core.IEffectSpawner effectSpawner)
-        {
-            _effectSpawner = effectSpawner;
+            _projectilePool = pool;
         }
 
         public void Fire(Vector2 direction)
@@ -69,7 +70,7 @@ namespace FlightIGuess.Weapons.Unity
             {
                 return;
             }
-            if (!string.IsNullOrEmpty(_hitEffectId) && _effectSpawner != null)
+            if (!string.IsNullOrEmpty(_hitEffectId))
             {
                 Vector2 hitPoint = transform.position;
                 Vector2 hitNormal = -_rb.linearVelocity.normalized;
@@ -80,11 +81,11 @@ namespace FlightIGuess.Weapons.Unity
                     hitNormal = collision.GetContact(0).normal;
                 }
 
-                _effectSpawner.Spawn(
+                EventBus.Raise(new SpawnEffectEvent(
                     _hitEffectId, 
                     new System.Numerics.Vector2(hitPoint.x, hitPoint.y), 
                     new System.Numerics.Vector2(hitNormal.x, hitNormal.y)
-                );
+                ));
             }
 
             // Handle damage logic here later...
@@ -97,16 +98,16 @@ namespace FlightIGuess.Weapons.Unity
             {
                 return;
             }
-            if (!string.IsNullOrEmpty(_hitEffectId) && _effectSpawner != null)
+            if (!string.IsNullOrEmpty(_hitEffectId))
             {
                 Vector2 hitPoint = transform.position;
                 Vector2 hitNormal = -_rb.linearVelocity.normalized;
 
-                _effectSpawner.Spawn(
+                EventBus.Raise(new SpawnEffectEvent(
                     _hitEffectId, 
                     new System.Numerics.Vector2(hitPoint.x, hitPoint.y), 
                     new System.Numerics.Vector2(hitNormal.x, hitNormal.y)
-                );
+                ));
             }
 
             // Handle damage logic here later...
@@ -127,7 +128,7 @@ namespace FlightIGuess.Weapons.Unity
             
             if (gameObject.activeInHierarchy)
             {
-                _pool?.Release(this);
+                _projectilePool?.Release(this);
             }
         }
     }

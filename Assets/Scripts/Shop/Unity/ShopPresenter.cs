@@ -17,7 +17,7 @@ namespace FlightIGuess.Shop.Unity
         [SerializeField] private int _rerollCost = 10;
 
         [Header("UI References")]
-        [SerializeField] private Canvas _shopCanvas;
+        [SerializeField] private GameObject _shopPanel;
         [SerializeField] private Transform _shopItemContainer;
         [SerializeField] private ShopItemUI _shopItemPrefab;
         [SerializeField] private TextMeshProUGUI _errorText;
@@ -50,10 +50,33 @@ namespace FlightIGuess.Shop.Unity
 
             _shopModel.RunStateModel.OnTotalScrapChanged += OnScrapChange;
             
-            if (_rerollButton != null) _rerollButton.onClick.AddListener(OnRerollClicked);
-            if (_nextWaveButton != null) _nextWaveButton.onClick.AddListener(OnNextWaveClicked);
-            if (_rerollCostText != null) _rerollCostText.text = $"Reroll ({_rerollCost})";
-            
+            if (_rerollButton != null) 
+            {
+                _rerollButton.onClick.AddListener(OnRerollClicked);
+            }
+            else
+            {
+                Debug.LogError("Missing Reroll button");
+            }
+
+            if (_nextWaveButton != null) 
+            {
+                _nextWaveButton.onClick.AddListener(OnNextWaveClicked);
+            }
+            else
+            {
+                Debug.LogError("Missing next wave button");
+            }
+
+            if (_rerollCostText != null) 
+            {
+                _rerollCostText.text = $"Reroll ({_rerollCost})";
+            }
+            else
+            {
+                Debug.LogError("Misisng Reroll Text");
+            }
+
             RollShopItems();
         }
 
@@ -63,16 +86,17 @@ namespace FlightIGuess.Shop.Unity
             {
                 _wavePresenter.StartNextWave();
             }
+            RollShopItems();
         }
         private void Start()
         {
             // Test if the Shop UI works
             RollShopItems();
 
-            // Hide Canvas on Start
-            if(_shopCanvas != null)
+            // Hide Panel on Start
+            if(_shopPanel != null)
             {
-                _shopCanvas.gameObject.SetActive(false);
+                _shopPanel.SetActive(false);
             }
         }
 
@@ -104,13 +128,18 @@ namespace FlightIGuess.Shop.Unity
             }
         }
 
-        public void TryBuyWeapon(WeaponConfigSO config)
+        public void TryBuyWeapon(WeaponConfigSO config, ShopItemUI itemUI)
         {
             if (_errorText != null) _errorText.text = ""; // Clear previous errors
             
             ShopItem item = config.CreateShopItem();
             _selectedWeapon = config;
-            _shopModel.TryBuyItem(item);
+            // TryBuyItem executes synchronously and returns a boolean.
+            // No need to subscribe to events; just check the result!
+            if (_shopModel.TryBuyItem(item))
+            {
+                itemUI.OnItemPurchaseSuccess(item);
+            }
         }
         
         private void OnDestroy()
@@ -137,6 +166,14 @@ namespace FlightIGuess.Shop.Unity
         private void OnScrapChange(int scrap)
         {
             _scrapCount.text = "Scrap: " + scrap;
+        }
+        
+        public void OnWaveAction(bool isWaveEnded)
+        {
+            if(_shopPanel != null)
+            {
+                _shopPanel.SetActive(isWaveEnded);
+            }
         }
     }
 }

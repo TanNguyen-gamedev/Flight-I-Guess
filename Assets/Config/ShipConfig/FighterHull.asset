@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlightIGuess.Ship.Unity.HullConfigSO
   Tier: 0
   MaxHP: 100
-  ThrustForce: 5000
-  TurnRate: 180
+  MaxSpeed: 20
+  Acceleration: 5
+  TurnRate: 90

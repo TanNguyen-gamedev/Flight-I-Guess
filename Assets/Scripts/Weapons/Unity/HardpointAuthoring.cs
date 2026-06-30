@@ -1,3 +1,4 @@
+using System;
 using FlightIGuess.Weapons.Core;
 using PrimeTween;
 using UnityEngine;
@@ -10,9 +11,14 @@ namespace FlightIGuess.Weapons.Unity
     /// </summary>
     public class HardpointAuthoring : MonoBehaviour
     {
+        [Header("Haedpoint Settings")]
         [SerializeField] private string _hardpointId;
         [SerializeField] private WeaponConfigSO _initialWeapon;
         [SerializeField] private HardpointSize _slotSize;
+        [Tooltip("Each hardpoint has a unique firing arc.\n\n" +
+         "<b>Setup Guide:</b>\n" +
+         "• Rotate the hardpoint to the <b>center</b> of its arc.\n" +
+         "• Example: A 90° arc means it can rotate left/right 45° from its starting position.")]        [SerializeField] private float _arcRangeDegrees = 45f;
         
         [Header("Recoil Visuals")]
         [Tooltip("The transform to apply visual recoil to. If null, falls back to this transform.")]
@@ -29,6 +35,7 @@ namespace FlightIGuess.Weapons.Unity
 
         public Vector2 Position => transform.position;
         public float InitialAngle => transform.rotation.eulerAngles.z;
+        public float ArcRangeDegrees => _arcRangeDegrees;
 
         public void SetWeaponConfig(WeaponConfigSO config)
         {
@@ -46,7 +53,7 @@ namespace FlightIGuess.Weapons.Unity
             }
         }
 
-        public void PlayRecoilTween()
+        public void PlayRecoilTween(float recoil, System.Numerics.Vector2 direction)
         {
             if (Visuals == null || _currentWeaponConfig == null) return;
 
