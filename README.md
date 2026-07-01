@@ -42,7 +42,7 @@ This project is built with a strict adherence to the **Humble Object / MVP Patte
 *   **Zero-Allocation:** Heavy use of Object Pooling (`IClearablePool`), `UniTask`, and struct-based `EventBus` payloads to avoid Garbage Collection spikes during gameplay.
 *   **Service Locator:** Cross-scene persistence and dependency injection are handled via a robust `Bootstrapper` pattern.
 
-For an in-depth breakdown of the architecture, mechanics, and roadmap, please see [design.md](Docs/design.md).
+For an in-depth breakdown of the architecture, mechanics, and roadmap, please see [design.md](Docs/Design.md).
 
 ## Contributing
 We welcome contributions! When contributing to this repository, please follow these guidelines:
