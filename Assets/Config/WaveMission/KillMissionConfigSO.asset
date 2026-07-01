@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: KillMissionConfigSO
   m_EditorClassIdentifier: Assembly-CSharp::KillMissionConfigSO
   Title: HUNT THE ENEMY
-  _kill: 20
+  _kill: 1

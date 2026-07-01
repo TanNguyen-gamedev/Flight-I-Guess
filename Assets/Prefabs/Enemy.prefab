@@ -73,15 +73,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ced5c62c7de2943881834c04b5db82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  _speed: 500
+  _speed: 50
   _minSize: 1
   _maxSize: 3
   _spinRate: 90
   _enemySprite: {fileID: 1253411121577317884}
   _attackTimer: 1
   _basePoint: 10
-  _onEnemyDeathFloat: {fileID: 11400000, guid: e79aacb0d84f9dc47b96c9a23a8ad7cd, type: 2}
-  _onEnemyDeath: {fileID: 11400000, guid: 2e43efa5ae8e2084eb302f914b374ee2, type: 2}
 --- !u!1 &6893376742449285793
 GameObject:
   m_ObjectHideFlags: 0

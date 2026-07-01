@@ -45,5 +45,10 @@ namespace FlightIGuess.Weapons.Unity
                 _pool?.Release(this);
             }
         }
+
+        public void ForceReturnToPool()
+        {
+            ReleaseToPool();
+        }
     }
 }

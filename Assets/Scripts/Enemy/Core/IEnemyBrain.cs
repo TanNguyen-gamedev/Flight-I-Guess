@@ -7,10 +7,12 @@ namespace FlightIGuess.Enemy.Core
         public Vector2 DesireMovement;
         public Vector2 DesireLookDirection;
         public bool IsFiring;
-        public EnemyIntent(Vector2 desireMovement, Vector2 desireLookDirection, bool isFiring)
+        public bool IsAiming;
+        public EnemyIntent(Vector2 desireMovement, Vector2 desireLookDirection, bool isAiming, bool isFiring)
         {
             DesireMovement = desireMovement;
             DesireLookDirection = desireLookDirection;
+            IsAiming = isAiming;
             IsFiring = isFiring;
         }
     }

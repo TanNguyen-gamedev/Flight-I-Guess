@@ -13,7 +13,14 @@ MonoBehaviour:
   m_Name: FighterHull
   m_EditorClassIdentifier: Assembly-CSharp::FlightIGuess.Ship.Unity.HullConfigSO
   Tier: 0
-  MaxHP: 100
+  MaxHP: 1000
+  MaxShield: 500
+  ShieldRegenRate: 10
+  ShieldRegenDelay: 5
   MaxSpeed: 20
   Acceleration: 5
   TurnRate: 90
+  MaxHeat: 100
+  HeatBuildRate: 35
+  HeatCoolRate: 15
+  OverheatPenaltyMultiplier: 2

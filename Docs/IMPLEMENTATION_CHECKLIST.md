@@ -27,10 +27,16 @@
     - [X] Implement Shield regeneration logic (recharges after avoiding damage).
     - [X] Implement permanent Hull damage logic (damage bleeds through broken shields).
     - [X] Implement End-of-Wave Hull healing (Brotato-style).
-  - [ ] **Enemy Archetypes**
-    - [ ] Implement "Sniper" enemy (telegraphed laser, high-speed projectile).
-    - [ ] Implement "Phalanx" enemy (directional front shield, slow).
-    - [ ] Implement "Swarmer" enemy (kamikaze/rammer, fast).
+  - [x] **Enemy Archetypes**
+    - [x] Implement "Sniper" enemy (telegraphed laser, high-speed projectile).
+    - [x] Implement "Swarmer" enemy (kamikaze/rammer, fast).
+    - [ ] *Moved to Backlog:* Implement "Phalanx" enemy (directional front shield, slow).
 
-- [ ] **Phase 5: Meta-Progression** 
+- [ ] **Phase 5: Game Flow & Menus**
+  - [ ] Implement Main Menu scene/UI.
+  - [ ] Implement Pause Menu (Time.timeScale = 0).
+  - [ ] Implement Game Over screen.
+  - [ ] Implement 10-Wave win condition and Victory screen.
+
+- [ ] **Phase 6: Meta-Progression** 
   - [ ] Save/Load system for permanent upgrades.

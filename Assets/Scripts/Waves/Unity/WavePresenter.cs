@@ -20,6 +20,11 @@ public class WavePresenter : MonoBehaviour
     [SerializeField] private MissionConfigSO[] _missionList;
     private WaveManager _waveManager;
     public WaveManager WaveManager => _waveManager;
+    public void SetPlayerTransform(Transform playerTransform)
+    {
+        _playerTransform = playerTransform;
+    }
+
     public event Action<bool> OnWaveAction;
 
     public void Init()

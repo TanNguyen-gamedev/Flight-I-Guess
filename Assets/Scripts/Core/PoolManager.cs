@@ -5,6 +5,11 @@ using UnityEngine;
 
 namespace FlightIGuess.Core
 {
+    public interface IClearablePool
+    {
+        void ClearActiveObjects();
+    }
+
     public class PoolManager : MonoBehaviour
     {
         private readonly Dictionary<Type, MonoBehaviour> _poolManagers = new();
@@ -24,6 +29,17 @@ namespace FlightIGuess.Core
             {
                 Debug.LogError($"PoolManager: PoolManager for type {typeof(T)} not found!");
                 return null;
+            }
+        }
+
+        public void ClearAllPools()
+        {
+            foreach (var keyValuePair in _poolManagers)
+            {
+                if (keyValuePair.Value is IClearablePool clearable)
+                {
+                    clearable.ClearActiveObjects();
+                }
             }
         }
     }

@@ -5,10 +5,9 @@ using SysNum = System.Numerics;
 using FlightIGuess.Core;
 using FlightIGuess.Gathering.Unity;
 
-public class ScrapPoolManager : MonoBehaviour
+public class ScrapPoolManager : MonoBehaviour, IClearablePool
 {
     [SerializeField] private ScrapPresenter _scrapPrefab;
-    [SerializeField] private EnemyDeathEventChannel _onEnemyDeath;
     
     [Header("Pool Settings")]
     [SerializeField] private int _defaultCapacity = 50;
@@ -36,24 +35,15 @@ public class ScrapPoolManager : MonoBehaviour
             maxSize: _maxSize
         );
     }
-    private void Start()
-    {
-        _runStatePresenter = Bootstrapper.Instance.GetManager<RunStatePresenter>();
-        if (_runStatePresenter == null)
-        {
-            Debug.LogError("ScrapPoolManager: Cannot spawn scrap, RunStatePresenter is missing!");
-            return;
-        }
-    }
 
     private void OnEnable()
     {
-        _onEnemyDeath.OnEventRaise += OnEnemyDeath;
+        EventBus.Subscribe<FlightIGuess.Enemy.Core.EnemyDeathEvent>(OnEnemyDeathEvent);
     }
 
     private void OnDisable()
     {
-        _onEnemyDeath.OnEventRaise -= OnEnemyDeath;
+        EventBus.Unsubscribe<FlightIGuess.Enemy.Core.EnemyDeathEvent>(OnEnemyDeathEvent);
     }
 
     /// <summary>
@@ -64,8 +54,12 @@ public class ScrapPoolManager : MonoBehaviour
     {
         if (_runStatePresenter == null)
         {
-            Debug.LogError("ScrapPoolManager: Cannot spawn scrap, RunStatePresenter is missing!");
-            return;
+            _runStatePresenter = Bootstrapper.Instance.GetManager<RunStatePresenter>();
+            if (_runStatePresenter == null)
+            {
+                Debug.LogError("ScrapPoolManager: Cannot spawn scrap, RunStatePresenter is missing!");
+                return;
+            }
         }
 
         // Get a visual presenter from the pool
@@ -91,11 +85,24 @@ public class ScrapPoolManager : MonoBehaviour
 
     private ScrapPresenter CreateScrap()
     {
-        return Instantiate(_scrapPrefab);
+        return Instantiate(_scrapPrefab, transform);
     }
 
-    private void OnEnemyDeath(Vector3 spawnPosition, int amount, ResourceType type)
+    private void OnEnemyDeathEvent(FlightIGuess.Enemy.Core.EnemyDeathEvent evt)
     {
-        SpawnScrap(spawnPosition, amount, type);
+        SpawnScrap(new Vector3(evt.Position.X, evt.Position.Y, evt.Position.Z), evt.Amount, evt.ResourceType);
+    }
+
+    public void ClearActiveObjects()
+    {
+        // Iterate backwards since we are releasing elements back to the pool
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            var child = transform.GetChild(i).GetComponent<ScrapPresenter>();
+            if (child != null && child.gameObject.activeInHierarchy)
+            {
+                child.ForceReturnToPool();
+            }
+        }
     }
 }

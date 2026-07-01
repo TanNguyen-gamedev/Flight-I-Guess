@@ -58,5 +58,13 @@ namespace FlightIGuess.Gathering.Unity
         {
             _playerTransform = playerTransform;
         }
+
+        private void OnDestroy()
+        {
+            if (Bootstrapper.Instance != null)
+            {
+                Bootstrapper.Instance.Unregister(this);
+            }
+        }
     }
 }

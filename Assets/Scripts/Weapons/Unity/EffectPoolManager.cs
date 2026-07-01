@@ -16,7 +16,7 @@ namespace FlightIGuess.Weapons.Unity
         public int MaxSize; 
     }
 
-    public class EffectPoolManager : MonoBehaviour, IEffectSpawner
+    public class EffectPoolManager : MonoBehaviour, IEffectSpawner, IClearablePool
     {
         [SerializeField] private EffectPoolConfig[] _effectPoolConfigs;
 
@@ -40,7 +40,7 @@ namespace FlightIGuess.Weapons.Unity
                 var pool = new ObjectPool<PooledEffect>(
                     createFunc: () => 
                     {
-                        var effect = Instantiate(currentConfig.EffectPrefab);
+                        var effect = Instantiate(currentConfig.EffectPrefab, transform);
                         return effect;
                     },
                     actionOnGet: (effect) => effect.gameObject.SetActive(true),
@@ -86,6 +86,18 @@ namespace FlightIGuess.Weapons.Unity
             else
             {
                 Debug.LogWarning($"[EffectPoolManager] No pool configured for Effect ID: {effectId}");
+            }
+        }
+
+        public void ClearActiveObjects()
+        {
+            for (int i = transform.childCount - 1; i >= 0; i--)
+            {
+                var child = transform.GetChild(i).GetComponent<PooledEffect>();
+                if (child != null && child.gameObject.activeInHierarchy)
+                {
+                    child.ForceReturnToPool();
+                }
             }
         }
     }

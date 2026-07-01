@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using FlightIGuess.Core;
 using FlightIGuess.Waves.Core;
 
 namespace FlightIGuess.Waves.Core
@@ -76,7 +77,7 @@ namespace FlightIGuess.Waves.Core
             OnWaveEnded?.Invoke(CurrentWave);
             
             // Raise an event to notify systems that the wave has ended
-            FlightIGuess.Core.EventBus.Raise(new WaveEndedEvent { WaveNumber = CurrentWave });
+            EventBus.Raise(new WaveEndedEvent { WaveNumber = CurrentWave });
             
             _currentWave++;
         }

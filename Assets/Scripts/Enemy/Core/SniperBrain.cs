@@ -1,8 +1,6 @@
 
-using System.Diagnostics;
+using System;
 using System.Numerics;
-using System.Reflection;
-using Unity.VisualScripting;
 
 namespace FlightIGuess.Enemy.Core
 {
@@ -19,7 +17,7 @@ namespace FlightIGuess.Enemy.Core
         private float _aimDuration = 2f;
         private float _lockDuration = 0.5f;
         private float _cooldownDuration =3f;
-
+        private float _offset = 1f;
         private States _currentState;
         private float _stateTimer;
         private Vector2 _lockedAimDirections;
@@ -33,28 +31,34 @@ namespace FlightIGuess.Enemy.Core
        
         public EnemyIntent Think(Vector2 playerPosition, Vector2 currentPosition)
         {
-              switch(_currentState)
+            Vector2 toPlayer = playerPosition - currentPosition;
+
+            switch(_currentState)
+            {
+                case States.Reposition:
                 {
-                    case States.Reposition:
-                    {
-                        Vector2 ToPlayer = playerPosition - currentPosition;
-                        Vector2 direction = Vector2.Normalize(ToPlayer);
-                        return new EnemyIntent(playerPosition - (direction * _optimalRange), ToPlayer, false);
-                    }
-                    case States.Aim:
-                    {
-                        _currentState = States.Locked;
-                        _stateTimer = _lockDuration;
-                        break;
-                    }
-                    case States.Locked:
-                    {
-                        _currentState = States.Reposition;
-                        _stateTimer = _cooldownDuration;
-                        break;
-                    }
+                    Vector2 directionToPlayer = Vector2.Normalize(toPlayer);
+                    float distance = toPlayer.Length();
+                    Vector2 desireMovement = (distance > _optimalRange) ? directionToPlayer : -directionToPlayer;
+                    return new EnemyIntent(desireMovement, directionToPlayer, false, false);
                 }
-                return new EnemyIntent();
+                case States.Aim:
+                {
+                    Vector2 dumbPlayerPos = new Vector2(playerPosition.X + _offset,
+                    playerPosition.Y);
+                    _lockedAimDirections = Vector2.Normalize(dumbPlayerPos - currentPosition);
+                    return new EnemyIntent(Vector2.Zero, _lockedAimDirections, true, false);      
+                }
+                case States.Locked:
+                {
+                    return new EnemyIntent(Vector2.Zero, _lockedAimDirections, true, false);
+                }
+                case States.Fire:
+                {
+                    return new EnemyIntent(Vector2.Zero, _lockedAimDirections, false, true);
+                }
+            }
+            return new EnemyIntent();
         }
 
         public void Tick(float dt)
@@ -77,6 +81,13 @@ namespace FlightIGuess.Enemy.Core
                         break;
                     }
                     case States.Locked:
+                    {
+                        _currentState = States.Fire;
+                        // Reuse lock duration for fire duration
+                        _stateTimer = _lockDuration;
+                        break;
+                    }
+                    case States.Fire:
                     {
                         _currentState = States.Reposition;
                         _stateTimer = _cooldownDuration;

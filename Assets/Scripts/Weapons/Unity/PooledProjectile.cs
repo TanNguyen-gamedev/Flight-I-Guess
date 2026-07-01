@@ -88,7 +88,14 @@ namespace FlightIGuess.Weapons.Unity
                 ));
             }
 
-            // Handle damage logic here later...
+            // Projectile damage logic
+            var damageable = collision.collider.GetComponentInParent<IDamageable>();
+            if (damageable != null && damageable.Health != null)
+            {
+                // TODO: Read this damage value from a WeaponConfig instead of hardcoding
+                damageable.Health.ApplyDamage(10f); 
+            }
+
             ReleaseToPool();
         }
 
@@ -110,7 +117,16 @@ namespace FlightIGuess.Weapons.Unity
                 ));
             }
 
-            // Handle damage logic here later...
+            // Projectile damage logic
+            var damageable = collider.GetComponentInParent<IDamageable>();
+            if (damageable != null && damageable.Health != null)
+            {
+                // TODO: Read this damage value from a WeaponConfig instead of hardcoding
+                damageable.Health.ApplyDamage(10f);
+                Debug.Log($"Current Hull: {damageable.Health.CurrentHull}");
+                Debug.Log($"Projectile hit {collider.name} for 10 damage");
+            }
+
             ReleaseToPool();
         }
 
@@ -130,6 +146,11 @@ namespace FlightIGuess.Weapons.Unity
             {
                 _projectilePool?.Release(this);
             }
+        }
+
+        public void ForceReturnToPool()
+        {
+            ReleaseToPool();
         }
     }
 }

@@ -15,6 +15,11 @@ namespace FlightIGuess.Core
         {
             if(_managers.TryGetValue(typeof(T), out var manager))
             {
+                if (manager == null)
+                {
+                    Debug.LogWarning($"Manager {typeof(T).Name} is registered but was destroyed. Returning null.");
+                    return null;
+                }
                 return (T)manager;
             }
             else
@@ -22,6 +27,22 @@ namespace FlightIGuess.Core
                 Debug.LogError($"Manager {typeof(T).Name} not found in Bootstrapper");
                 return null;
             }
+        }
+
+        public bool TryGetManager<T>(out T manager) where T : MonoBehaviour
+        {
+            if(_managers.TryGetValue(typeof(T), out var foundManager))
+            {
+                if (foundManager == null)
+                {
+                    manager = null;
+                    return false;
+                }
+                manager = (T)foundManager;
+                return true;
+            }
+            manager = null;
+            return false;
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -43,11 +64,29 @@ namespace FlightIGuess.Core
         {
             if(_managers.TryGetValue(typeof(T), out var existingManager))
             {
-                Debug.LogError($"Manager {typeof(T).Name} already registered in Bootstrapper");
+                if (existingManager != null && existingManager != manager)
+                {
+                    Debug.LogError($"Manager {typeof(T).Name} already registered in Bootstrapper");
+                }
+                else
+                {
+                    _managers[typeof(T)] = manager;
+                }
             }
             else
             {
                 _managers.Add(typeof(T), manager);
+            }
+        }
+
+        public void Unregister<T>(T manager) where T : MonoBehaviour
+        {
+            if (_managers.TryGetValue(typeof(T), out var existingManager))
+            {
+                if (existingManager == manager)
+                {
+                    _managers.Remove(typeof(T));
+                }
             }
         }
 

@@ -44,6 +44,11 @@ namespace FlightIGuess.Combat.Unity
 
         private void OnDestroy()
         {
+            if (Bootstrapper.Instance != null)
+            {
+                Bootstrapper.Instance.Unregister(this);
+            }
+
             if (_combatManager != null)
             {
                 _combatManager.Dispose();

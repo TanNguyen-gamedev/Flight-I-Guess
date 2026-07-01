@@ -3,13 +3,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using PrimeTween;
 using FlightIGuess.Ship.Core;
-using Unity.VisualScripting;
-using UnityEngine.Events;
-using System.Runtime.CompilerServices;
-using FlightIGuess.Ship.Unity;
-using System;
+
 
 using FlightIGuess.Combat.Core;
+using FlightIGuess.Core;
 
 public class PlayerController : MonoBehaviour, IDamageable, IKinematicBody
 {
@@ -18,10 +15,6 @@ public class PlayerController : MonoBehaviour, IDamageable, IKinematicBody
 
     [Header("Boost Settings")]
     [SerializeField] private float _boostMultiplier = 2.5f;
-    [SerializeField] private float _maxHeat = 100f;
-    [SerializeField] private float _heatBuildRate = 35f; // Heat per second while boosting
-    [SerializeField] private float _heatCoolRate = 15f;  // Heat per second while not boosting
-    [SerializeField] private float _overheatPenaltyMultiplier = 2f; // Cooldown is slower if overheated
     
     [SerializeField] private GameObject _boosterFlame;
     [SerializeField] private GameObject _bulletPrefab;
@@ -36,9 +29,6 @@ public class PlayerController : MonoBehaviour, IDamageable, IKinematicBody
     private Vector2 _moveInput;
     private float _mouseScrollY;
     private bool _isBoosting = false;
-    
-    private float _currentHeat = 0f;
-    private bool _isOverheated = false;
     private bool _boostInput = false;
 
     private ShipModel _shipModel;
@@ -55,8 +45,20 @@ public class PlayerController : MonoBehaviour, IDamageable, IKinematicBody
         _shipModel.OnHullUpgrade += HandleHullUpgrade;
         _shipModel.OnShipRecoil += HandleShipRecoil;
         
+        // Subscribe HUD to heat model if available
+        if (_shipModel.Heat != null)
+        {
+            var hud = Bootstrapper.Instance.GetManager<HUD>();
+            if (hud != null)
+            {
+                _shipModel.Heat.OnHeatChanged += hud.OnHeatChanged;
+                _shipModel.Heat.OnOverheatStateChanged += hud.OnOverheatStateChanged;
+            }
+        }
+
         // Ensure correct visual is enabled on start
         HandleHullUpgrade(_shipModel.Stats);
+        Bootstrapper.Instance.Register(this);
     }
 
 
@@ -87,6 +89,7 @@ public class PlayerController : MonoBehaviour, IDamageable, IKinematicBody
         _inputSystem.Player.Sprint.canceled += OnBoost;
         _inputSystem.Player.ScrollWheel.performed += OnMouseScroll;
         
+        _inputSystem.Player.Pause.performed += OnPause;
     }
 
     private void OnDisable()
@@ -95,12 +98,41 @@ public class PlayerController : MonoBehaviour, IDamageable, IKinematicBody
         _inputSystem.Player.Move.canceled -= OnMoveCancel;
         _inputSystem.Player.Sprint.performed -= OnBoost;
         _inputSystem.Player.Sprint.canceled -= OnBoost;
-        _inputSystem.Player.ScrollWheel.canceled -= OnMouseScroll;
+        _inputSystem.Player.ScrollWheel.performed -= OnMouseScroll;
+        
+        _inputSystem.Player.Pause.performed -= OnPause;
         _inputSystem.Disable();
 
         if (_shipModel != null)
         {
             _shipModel.OnHullUpgrade -= HandleHullUpgrade;
+            _shipModel.OnShipRecoil -= HandleShipRecoil;
+            
+            if (_shipModel.Heat != null)
+            {
+                if (Bootstrapper.Instance.TryGetManager<HUD>(out var hud))
+                {
+                    _shipModel.Heat.OnHeatChanged -= hud.OnHeatChanged;
+                    _shipModel.Heat.OnOverheatStateChanged -= hud.OnOverheatStateChanged;
+                }
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Bootstrapper.Instance != null)
+        {
+            Bootstrapper.Instance.Unregister(this);
+        }
+    }
+
+    private void OnPause(InputAction.CallbackContext context)
+    {
+        var gameManager = Bootstrapper.Instance.GetManager<GameManager>();
+        if (gameManager != null)
+        {
+            gameManager.TogglePause();
         }
     }
 
@@ -134,35 +166,12 @@ public class PlayerController : MonoBehaviour, IDamageable, IKinematicBody
 
     private void HandleHeatSystem()
     {
-        if (_boostInput && !_isOverheated && _moveInput.y > 0)
-        {
-            _isBoosting = true;
-            _currentHeat += _heatBuildRate * Time.fixedDeltaTime;
-            
-            if (_currentHeat >= _maxHeat)
-            {
-                _currentHeat = _maxHeat;
-                _isOverheated = true;
-                _isBoosting = false;
-                // Optional: Fire an event here to trigger an overheat sound/UI
-            }
-        }
-        else
-        {
-            _isBoosting = false;
-            
-            if (_currentHeat > 0)
-            {
-                float coolingRate = _isOverheated ? (_heatCoolRate / _overheatPenaltyMultiplier) : _heatCoolRate;
-                _currentHeat -= coolingRate * Time.fixedDeltaTime;
-                
-                if (_currentHeat <= 0)
-                {
-                    _currentHeat = 0;
-                    _isOverheated = false; // Reset overheat state once fully cooled
-                }
-            }
-        }
+        if (_shipModel == null || _shipModel.Heat == null) return;
+        
+        bool isAddingHeat = _boostInput && _moveInput.y > 0;
+        _shipModel.Heat.Tick(Time.fixedDeltaTime, isAddingHeat);
+        
+        _isBoosting = isAddingHeat && !_shipModel.Heat.IsOverheated;
     }
 
     private void MovePlayer()

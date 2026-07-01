@@ -16,7 +16,7 @@ namespace FlightIGuess.Weapons.Unity
         public int MaxSize;
     }
 
-    public class ProjectilePoolManager : MonoBehaviour, IProjectileSpawner
+    public class ProjectilePoolManager : MonoBehaviour, IProjectileSpawner, IClearablePool
     {
         [SerializeField] private ProjectilePoolConfig[] _poolConfigs;
 
@@ -41,8 +41,7 @@ namespace FlightIGuess.Weapons.Unity
                 var pool = new ObjectPool<PooledProjectile>(
                     createFunc: () => 
                     {
-                        var projectile = Instantiate(currentConfig.Prefab);
-                        // Inject the pool reference so the projectile can release itself
+                        var projectile = Instantiate(currentConfig.Prefab, transform);
                         return projectile;
                     },
                     actionOnGet: (projectile) => projectile.gameObject.SetActive(true),
@@ -75,6 +74,18 @@ namespace FlightIGuess.Weapons.Unity
             else
             {
                 Debug.LogWarning($"[ProjectilePoolManager] No pool configured for Projectile ID: {projectileId}");
+            }
+        }
+
+        public void ClearActiveObjects()
+        {
+            for (int i = transform.childCount - 1; i >= 0; i--)
+            {
+                var child = transform.GetChild(i).GetComponent<PooledProjectile>();
+                if (child != null && child.gameObject.activeInHierarchy)
+                {
+                    child.ForceReturnToPool();
+                }
             }
         }
     }

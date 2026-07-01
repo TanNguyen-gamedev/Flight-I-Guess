@@ -79,4 +79,13 @@ public class ScrapPresenter: MonoBehaviour
             _scrapPool?.Release(this);
         }
     }
+
+    public void ForceReturnToPool()
+    {
+        if (_model != null)
+        {
+            _model.OnMagnetized -= HandleMagnetized;
+        }
+        ReturnToPool();
+    }
 }

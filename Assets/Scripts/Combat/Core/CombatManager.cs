@@ -94,7 +94,7 @@ namespace FlightIGuess.Combat.Core
 
         private void ApplyCollisionDamage(CollisionDamage collision, float velocity)
         {
-            
+
             float damageToA = velocity * collision.BodyB.Mass * _damageMultiplier;
             float damageToB = velocity * collision.BodyA.Mass * _damageMultiplier;
             if(collision.EntityA != null)

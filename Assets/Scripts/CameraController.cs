@@ -1,3 +1,4 @@
+using FlightIGuess.Core;
 using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -41,7 +42,15 @@ public class CameraController : MonoBehaviour
     {
         if(_playerTransform == null)
         {
-            return;
+            if(Bootstrapper.Instance.GetManager<PlayerController>() != null)
+            {
+                _playerTransform = Bootstrapper.Instance.GetManager<PlayerController>().transform;
+            }
+            if(_playerTransform == null)
+            {
+                Debug.LogError("PlayerTransform not found in the scene!");
+                return;
+            }
         }
         transform.position = _playerTransform.position + _offset;
 

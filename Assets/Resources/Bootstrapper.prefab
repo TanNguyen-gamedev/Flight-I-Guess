@@ -58,6 +58,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6656117210131985655}
   - component: {fileID: 4040532582426589435}
+  - component: {fileID: 6411859169288324713}
   m_Layer: 0
   m_Name: Bootstrapper
   m_TagString: Untagged
@@ -79,6 +80,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3197350696374897300}
+  - {fileID: 6981423064618188944}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4040532582426589435
@@ -93,6 +95,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123846c81529aef4aa61699cfe143c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlightIGuess.Core.Bootstrapper
+--- !u!114 &6411859169288324713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3736244039540706540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c0c27b9552cd148936b0b2c4832d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlightIGuess.Core.SceneTransitionManager
 --- !u!1 &4454293653549317619
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +213,51 @@ MonoBehaviour:
     Prefab: {fileID: 8478641666152293504, guid: 1de5112bf05c23949ac17bb8372dc168, type: 3}
     DefaultCapacity: 20
     MaxSize: 50
+--- !u!1 &8445838537305536187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6981423064618188944}
+  - component: {fileID: 347165551833269734}
+  m_Layer: 0
+  m_Name: AppManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6981423064618188944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8445838537305536187}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6656117210131985655}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &347165551833269734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8445838537305536187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd45a33a3e2e3e54f99038f1693730a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlightIGuess.Core.AppManager
+  SelectedStartingWeapon: {fileID: 11400000, guid: 2e8882783d9d83a4ea0f23557cee48f1, type: 2}
 --- !u!1 &8659913589415776825
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,8 +351,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrapPoolManager
   _scrapPrefab: {fileID: 1091086221264738733, guid: 8c34c3462f2974048a48f3e3c3e6bc60, type: 3}
-  _config: {fileID: 11400000, guid: 931f359a0e14c4c45a982d4025fe491e, type: 2}
-  _playerTransform: {fileID: 0}
-  _onEnemyDeath: {fileID: 11400000, guid: 2e43efa5ae8e2084eb302f914b374ee2, type: 2}
   _defaultCapacity: 50
   _maxSize: 200

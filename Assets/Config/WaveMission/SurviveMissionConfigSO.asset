@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SurviveMissionConfigSO
   m_EditorClassIdentifier: Assembly-CSharp::SurviveMissionConfigSO
   Title: STAY ALIVE
-  _duration: 60
+  _duration: 5

@@ -28,16 +28,18 @@ namespace FlightIGuess.Ship.Core
     {
         public ShipModelStats Stats;
         public HealthModel Health { get; private set; }
+        public HeatModel Heat { get; private set; }
         
         public event Action<ShipModelStats> OnHullUpgrade;
         public event Action<float, Vector2> OnShipRecoil;
 
         private List<HardpointModel> _activeHardPoint;
-        public ShipModel(ShipModelStats stats, HealthModel healthModel)
+        public ShipModel(ShipModelStats stats, HealthModel healthModel, HeatModel heatModel)
         {
             _activeHardPoint = new List<HardpointModel>();
             Stats = stats;
             Health = healthModel;
+            Heat = heatModel;
             Stats.ActiveHardPoint = _activeHardPoint;
         }
 

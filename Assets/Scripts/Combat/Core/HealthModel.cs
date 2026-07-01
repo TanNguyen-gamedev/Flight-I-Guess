@@ -36,8 +36,10 @@ namespace FlightIGuess.Combat.Core
 
         public void ApplyDamage(float amount)
         {
-            if (CurrentHull <= 0) return; // Already dead
-
+            if (CurrentHull <= 0) 
+            {
+                return; // Already dead
+            }
             _timeSinceLastDamage = 0f; // Reset regen timer
 
             if (CurrentShield > 0)
@@ -89,8 +91,6 @@ namespace FlightIGuess.Combat.Core
 
         public void FullyRestoreHull()
         {
-            if (CurrentHull <= 0) return; // Don't revive dead entities
-            
             CurrentHull = MaxHull;
             OnHullChanged?.Invoke(CurrentHull, MaxHull);
         }

@@ -15,7 +15,7 @@
    - **Newtonian Drift:** The ship carries momentum; releasing thrust causes the ship to drift, requiring active counter-thrust to maneuver effectively.
    - **Engine Boost:** A heat-managed boost system allows for rapid repositioning, penalized by overheating if used recklessly.
    - **Firing Arcs:** Hardpoints have specific rotational constraints (e.g., front-facing, broadside) requiring the player to physically orient the ship to bring weapons to bear on targets.
-5. **Die & Progress:** When the hull is destroyed, the run ends. Spend **Cores** in the main menu to unlock permanent passive upgrades or new starting weapon modules.
+5. **Die & Progress:** When the hull is destroyed, the run ends. Spend **Cores** in the main menu to unlock new starting weapon modules (e.g., Shotgun, Missiles). The player always starts a run as a Tier 1 Fighter and must grind to evolve into a Cruiser. (Future: Unlockable starting hull classes).
 
 ## 3. Ship Evolution System
 The player's ship is not static. It grows in size, durability, and firepower.
@@ -29,6 +29,7 @@ The player's ship is not static. It grows in size, durability, and firepower.
 - **In-Wave Missions:** Waves can feature optional strategy missions (e.g., "Hunt 10 Scout Ships"). Completing the mission before the timer runs out grants a large Scrap bounty.
 - **End of Wave Shop:** When the wave timer ends, the game pauses (`Time.timeScale = 0`). The player enters the Shop to spend Scrap.
 - **Weapon Sizing:** Weapons and hardpoints have sizes (`Small`, `Medium`, `Large`). A Fighter cannot mount a Battleship Cannon. Players must strategically decide to buy better small weapons or save for a hull upgrade.
+- **Win Condition:** The game is won by surviving 10 consecutive waves. After the 10th wave, a Victory screen is presented instead of the Shop.
 
 ## 4. Architectural Impact (Humble Object Pattern)
 To maintain our strict separation of logic (Core) and engine (Unity), the architecture is divided into distinct feature modules following our folder structure:
@@ -63,8 +64,9 @@ To maintain our strict separation of logic (Core) and engine (Unity), the archit
 - **`MissionConfigSO` (Unity)**: ScriptableObject hierarchy (e.g., `KillMissionConfigSO`, `SurviveMissionConfigSO`) used to configure wave parameters and construct pure C# `IWaveMission` instances.
 
 ### Core Flow & UI (`Scripts/` & `Scripts/Core/`)
-- **`GameManager` (Core)**: High-level state machine managing the transitions between Gameplay, Shop, and Game Over states. Coordinates the initialization of other models.
+- **`GameManager` (Core)**: High-level state machine managing the transitions between Main Menu, Gameplay, Pause Menu, Shop, Victory, and Game Over states. Coordinates the initialization of other models.
 - **`HUD` (Unity)**: Manages the in-game Canvas/TMP overlays (Scrap count, Wave timer, Mission progress) by listening to events from the core models.
+- **`MenuPresenter` (Unity)**: Manages the Main Menu, Pause Menu, Game Over, and Victory Canvas UI elements, hooking into the `GameManager` state events.
 
 ## 5. Combat & Health System Design
 ### Health & Damage Mechanics
@@ -75,12 +77,12 @@ To provide a buffer for this physics-heavy system, ships utilize a hybrid **Shie
 ### Enemy Archetypes
 Enemies are specifically designed to challenge the player's mastery of Newtonian drift and heat management:
 *   **The "Sniper":** Forces the player to utilize their Engine Boost by locking on with a telegraphed laser before firing a devastating, high-speed projectile.
-*   **The "Phalanx":** A heavily armored, slow-moving ship with an impenetrable directional front shield. Players must use Newtonian drift to slide past its defenses and strike its vulnerable rear.
 *   **The "Swarmer":** Fast, fragile kamikaze ships that constantly pressure the player's position, forcing them to kite and fire backward while drifting.
 
 
 ## 6. Backlog / Future Mechanics Ideas
 Mechanics to evaluate for future implementation to deepen the physics sandbox:
+- **The "Phalanx" Enemy:** A heavily armored, slow-moving ship with an impenetrable directional front shield. Players must use Newtonian drift to slide past its defenses and strike its vulnerable rear.
 - **Interactive Asteroids:** Physical rigidbodies that can be weaponized by shooting them into enemies.
 - **Gravity Wells / Black Holes:** Spatial anomalies that pull entities, allowing for slingshot maneuvers using drift.
 - **The "Scrap Comet":** A fast, non-hostile loot goblin ship that crosses the arena. High risk to chase, high reward in scrap/cores.

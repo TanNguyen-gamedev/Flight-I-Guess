@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using FlightIGuess.Weapons.Unity;
 using System;
+using FlightIGuess.Core;
 
 namespace FlightIGuess.Shop.Unity
 {
@@ -87,6 +88,8 @@ namespace FlightIGuess.Shop.Unity
                 _wavePresenter.StartNextWave();
             }
             RollShopItems();
+            // Change to Playing state after next wave
+            Bootstrapper.Instance.GetManager<GameManager>().ChangeGameState(GameState.Playing);
         }
         private void Start()
         {
